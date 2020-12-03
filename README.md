@@ -18,3 +18,5 @@
 - Zaduženja:
 
     Marko Cunj - koordinacija izrađivanja stranica u CSS-u, HTML-u i JS-u. Uređivanje stranica u samom projektu pomoću VUE-js i kasniji dogovor oko dodatnih zaduženja sa kolegom Pejdom. (Dio zaduženja će biti dogovoren tokom izrade samih stranica).
+    
+    Davor Pejdo - izrađivanje stranica u CSS-u, HTML-u i JS-u. Uređivanje stranica u samom projektu pomoću VUE-js  (Dio zaduženja će biti dogovoren tokom izrade samih stranica) i testiranje  funkcionalnosti aplikacije.
