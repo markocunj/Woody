@@ -9,6 +9,46 @@
   </div>
 </template>
 
+<script>
+import firebase from "firebase";
+
+export default {
+  name: "top-header",
+  mounted() {
+    this.setupFirebase();
+  },
+  methods: {
+    setupFirebase() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in.
+          console.log("signed in");
+          this.loggedIn = true;
+        } else {
+          // No user is signed in.
+          this.loggedIn = false;
+          console.log("signed out", this.loggedIn);
+        }
+      });
+    },
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({ name: "login" });
+        });
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+div {
+  color: inherit;
+}
+</style>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
