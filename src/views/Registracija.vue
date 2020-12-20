@@ -123,6 +123,7 @@
 html ,#app{ height: 100%;
             background: linear-gradient(rgba(187, 223, 120, 0.5),rgba(187, 223, 120, 0.5)),url('~@/assets/suma.jpg');
             background-size: cover;
+            width: 100%;
             }
 #nav{background-color: rgba(5, 51, 9, 0.9);border-radius: 0px 0px 1600px 500px;font-weight: bold;color:white;font-size: 20px;}
 .headline{text-align: left;}
