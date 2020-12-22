@@ -44,6 +44,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './assets/style/woody.css';
 div {
   color: inherit;
 }
