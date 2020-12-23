@@ -1,5 +1,5 @@
 <template>
-  <div :style="image">
+  <div>
     <div class="card bg-light">
       <article class="card-body mx-auto" style="max-width: 400px;">
         <h4 class="card-title mt-3 text-center">Prijava</h4>
@@ -41,9 +41,7 @@
               Prijava
             </button>
           </div>
-          <p class="divider-text">
-            <span class="bg-light">ILI</span>
-          </p>
+          <p class="divider-text"></p>
           <p>
             <a href="" class="btn btn-block btn-google">
               <i class="fab fa-google"></i> Login via Google</a
@@ -59,10 +57,11 @@
 </template>
 
 <script>
-import firebase from "firebase";
+import { firebase } from "@/firebase.js";
 import Home from "@/views/Home.vue";
 
 export default {
+  name: "Prijava",
   data() {
     return {
       email: "",
@@ -87,36 +86,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.divider-text {
-  position: relative;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.divider-text span {
-  padding: 7px;
-  font-size: 12px;
-  position: relative;
-  z-index: 2;
-}
-.divider-text:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-  top: 55%;
-  left: 0;
-  z-index: 1;
-}
-
-.btn-facebook {
-  background-color: #405d9d;
-  color: #fff;
-}
-.btn-google {
-  background-color: #7c98a8;
-  color: #fff;
-}
-</style>

@@ -14,8 +14,9 @@
                   <label id="email">Email Address</label>
                   <input
                     type="text"
-                    placeholder="Enter Email Address Here.."
+                    placeholder="Email adresa"
                     class="form-control"
+                    v-model="email"
                   />
                 </div>
               </div>
@@ -24,34 +25,38 @@
                   <label id="ime">Ime</label>
                   <input
                     type="text"
-                    placeholder="pr.Ivan"
+                    placeholder="Ime"
                     class="form-control"
+                    v-model="ime"
                   />
                 </div>
                 <div class="col-sm-6">
                   <label id="prezime">Prezime</label>
                   <input
                     type="text"
-                    placeholder="pr.Horvat"
+                    placeholder="Prezime"
                     class="form-control"
+                    v-model="prezime"
                   />
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
-                  <label id="pass">Password</label>
+                  <label id="pass">Lozinka</label>
                   <input
                     type="text"
-                    placeholder="Password"
+                    placeholder="Lozinka"
                     class="form-control"
+                    v-model="password"
                   />
                 </div>
                 <div class="col-sm-6">
-                  <label id="repeat">Repeat Password</label>
+                  <label id="repeat">Ponovljena lozinka</label>
                   <input
                     type="text"
-                    placeholder="Password"
+                    placeholder="Ponovljena lozinka"
                     class="form-control"
+                    v-model="repeatPassword"
                   />
                 </div>
               </div>
@@ -61,8 +66,9 @@
                   <input
                     type="text"
                     id="godina"
-                    placeholder="pr.1994"
+                    placeholder="Godina"
                     class="form-control"
+                    v-model="godina"
                   />
                 </div>
                 <div class="col-sm-3">
@@ -70,8 +76,9 @@
                   <input
                     type="text"
                     id="mh"
-                    placeholder="pr.12"
+                    placeholder="Dan"
                     class="form-control"
+                    v-model="dan"
                   />
                 </div>
                 <div class="col-sm-3">
@@ -79,25 +86,29 @@
                   <input
                     type="text"
                     id="dan"
-                    placeholder="pr.Siječanj"
+                    placeholder="Mjesec"
                     class="form-control"
+                    v-model="mjesec"
                   />
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12">
                   <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Inventore dicta soluta quis iure asperiores consequatur, eum
-                    aliquid! Neque voluptatem,
+                    Ovim putem potvrđujem ispravnost svih priloženih informacija
+                    i potvrđujem da imam najmanje 18 godina.
                   </p>
                   <input type="checkbox" />
                   <span class="checkmark"></span>
-                  <label>Šaljite mi mailove</label>
+                  <label>Potvrđujem</label>
                 </div>
               </div>
               <div>
-                <button type="button" class="btn btn-lg btn-info">
+                <button
+                  type="button"
+                  class="btn btn-lg btn-info"
+                  @click="registracija"
+                >
                   Registracija
                 </button>
               </div>
@@ -108,3 +119,38 @@
     </div>
   </div>
 </template>
+
+<script>
+import { firebase } from "@/firebase.js";
+
+export default {
+  name: "Registracija",
+  data() {
+    return {
+      email: "",
+      password: "",
+      repeatPassword: "",
+      ime: "",
+      prezime: "",
+      godina: "",
+      mjesec: "",
+      dan: "",
+    };
+  },
+  methods: {
+    registracija() {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+          alert("Uspješna registracija");
+          console.log(user);
+        })
+        .catch((error) => {
+          console.error("Došlo je do greške", error);
+          alert(error.message);
+        });
+    },
+  },
+};
+</script>
