@@ -1,0 +1,65 @@
+@media only screen and (min-width: 200px) and (max-width: 767px)  { 
+       .register-left img {
+        margin-bottom: 20px; 
+        top: 20px;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        float:unset;
+
+        }
+        p {
+            font-size: 12px;
+            font-weight: unset;
+            padding: 0px;
+        }
+        .container {
+            width: 80%;
+            margin-right: auto !important;
+            margin-left: auto !important;
+            font-size: 0.9em;
+            float:unset;
+            top:-20px;
+            height:90%
+        }
+        #app {
+            height: auto;
+        
+        
+  }
+}
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) and (max-width: 1424px)  {
+.container {float:left;
+    width: 100%;
+    height: 100%;
+    margin-right: auto !important;
+    margin-left: auto !important;
+    font-size: 0.9em;
+    float:unset;
+    padding-left: 20px;
+    }
+    .row .col-sm-6 label {
+     font-weight: bold;
+    }
+        .register-left img {
+            margin-bottom: 30px; 
+            top: 50%;
+          
+            margin-right: auto !important;
+            margin-left: auto !important;
+        }
+        p {
+            font-size: 12px;
+            font-weight: unset;
+            padding: 0px;
+        }
+ 
+    }
+
+    @media only screen and (min-width: 200px) and (max-width: 767px) and (orientation : portrait) 
+  {     
+      h6 {
+          color:white;
+      }
+  }
