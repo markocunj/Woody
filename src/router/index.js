@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Ponuda from "../views/Ponuda.vue";
+import Prijava from "../views/Prijava.vue";
+import Registracija from "../views/Registracija.vue";
+import Kontakt from "../views/Kontakt.vue";
 
 Vue.use(VueRouter);
 
@@ -13,14 +17,22 @@ const routes = [
   {
     path: "/prijava",
     name: "Prijava",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Prijava.vue"),
+    component: Prijava,
   },
   {
     path: "/registracija",
     name: "Registracije",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Registracija.vue"),
+    component: Registracija,
+  },
+  {
+    path: "/ponuda",
+    name: "Ponuda",
+    component: Ponuda,
+  },
+  {
+    path: "/kontakt",
+    name: "Kontakt",
+    component: Kontakt,
   },
 ];
 

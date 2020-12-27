@@ -23,45 +23,86 @@
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link">Ponuda</router-link>
+            <router-link to="/ponuda" class="nav-link">Ponuda</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link">Kontakt</router-link>
+            <router-link to="/kontakt" class="nav-link">Kontakt</router-link>
           </li>
-          <!--<li class="nav-item">
-             <router-link to="/prijava" class="nav-link">Prijava</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/registracija" class="nav-link"
-              >Registracija</router-link
-            >
-          </li> 
-          </li>-->
         </ul>
-        <router-link to="/prijava">
-          <button
-            type="button"
-            style="background-color: transparent; color: rgba(255,255,255,.5); "
-            class="btn btn-light"
-          >
-            Prijava
-          </button>
-        </router-link>
+        <a
+          v-if="
+            !store.currentUser &&
+              $router.currentRoute.path != '/prijava' &&
+              $router.currentRoute.path != '/registracija'
+          "
+        >
+          <router-link to="/prijava">
+            <button
+              type="button"
+              style="background-color: transparent; color: rgba(255,255,255,.5); "
+              class="btn btn-light"
+            >
+              Prijava
+            </button>
+          </router-link>
+        </a>
+        <a v-if="store.currentUser" href="#" @click.prevent="odjava()">
+          <router-link to="/home">
+            <button
+              type="button"
+              style="background-color: transparent; color: rgba(255,255,255,.5); "
+              class="btn btn-light"
+            >
+              Odjava
+            </button>
+          </router-link>
+        </a>
       </div>
     </nav>
     <router-view />
     <WoodyFooter />
   </div>
 </template>
+
 <script>
 import WoodyFooter from "@/components/WoodyFooter.vue";
+import { firebase } from "@/firebase";
+import router from "@/router";
+import store from "@/store.js";
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log(user.email);
+    store.currentUser = user.email;
+  } else {
+    console.log("No user");
+    store.currentUser = null;
+  }
+});
+
 export default {
   name: "App",
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    odjava() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Prijava" });
+        });
+    },
+  },
   components: {
     WoodyFooter,
   },
 };
 </script>
+
 <style lang="scss">
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";

@@ -17,24 +17,7 @@
                       type="text"
                       placeholder="Enter Email Address Here.."
                       class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label id="ime">Ime</label>
-                    <input
-                      type="text"
-                      placeholder="pr.Ivan"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-sm-6">
-                    <label id="prezime">Prezime</label>
-                    <input
-                      type="text"
-                      placeholder="pr.Horvat"
-                      class="form-control"
+                      v-model="email"
                     />
                   </div>
                 </div>
@@ -45,6 +28,7 @@
                       type="text"
                       placeholder="Password"
                       class="form-control"
+                      v-model="password"
                     />
                   </div>
                   <div class="col-sm-6">
@@ -53,52 +37,16 @@
                       type="text"
                       placeholder="Password"
                       class="form-control"
+                      v-model="repeatPassword"
                     />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-3">
-                    <label id="year">Godina</label>
-                    <input
-                      type="text"
-                      id="godina"
-                      placeholder="pr.1994"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-sm-3">
-                    <label id="day">Dan</label>
-                    <input
-                      type="text"
-                      id="mh"
-                      placeholder="pr.12"
-                      class="form-control"
-                    />
-                  </div>
-                  <div class="col-sm-3">
-                    <label id="month">Mjesec</label>
-                    <input
-                      type="text"
-                      id="dan"
-                      placeholder="pr.Siječanj"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <p>
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Inventore dicta soluta quis iure asperiores consequatur,
-                      eum aliquid! Neque voluptatem,
-                    </p>
-                    <input type="checkbox" />
-                    <span class="checkmark"></span>
-                    <label>Šaljite mi mailove</label>
                   </div>
                 </div>
                 <div class="regi">
-                  <button type="button" class="btn btn-lg btn-info">
+                  <button
+                    type="button"
+                    @click="registracija()"
+                    class="btn btn-lg btn-info"
+                  >
                     Registracija
                   </button>
                 </div>
@@ -146,21 +94,29 @@ export default {
     return {
       email: "",
       password: "",
+      repeatPassword: "",
     };
   },
   methods: {
     registracija() {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then((user) => {
-          alert("Uspješna registracija");
-          console.log(user);
-        })
-        .catch((error) => {
-          console.error("Došlo je do greške", error);
-          alert(error.message);
-        });
+      if (this.password == this.repeatPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then((user) => {
+            console.log("Uspješna registracija");
+            alert("Uspješna registracija");
+
+            this.$router.replace({ name: "Prijava" });
+          })
+          .catch(function(error) {
+            console.error("Došlo je do greške", error);
+            alert(error.message);
+          });
+        console.log("Nastavak");
+      } else {
+        alert("Password nije jednak repeat passwordu.");
+      }
     },
   },
 };

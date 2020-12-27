@@ -1,5 +1,7 @@
 <template>
-  <div class="home"></div>
+  <div class="home">
+    <p style="color: #fff">Home</p>
+  </div>
 </template>
 
 <script>
