@@ -1,154 +1,174 @@
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-/* za singup page*/
-.container {
-  height: 640px;
-  width: 600px;
-  margin-right: 200px;
-  padding: 50px;
-  margin-top: 100px;
-  background-color: rgba(150, 228, 106, 0.712);
-  border-radius: 30px;
-  font-size: 17px;
-  font-weight: bold;
-}
-html,
-#app {
-  height: 100%;
-  background: linear-gradient(
-      rgba(187, 223, 120, 0.5),
-      rgba(187, 223, 120, 0.5)
-    ),
-    url("~@/assets/suma.jpg");
-  background-size: cover;
-  width: 100%;
-  position: absolute;
-  background-repeat: no-repeat;
-}
-#nav {
-  background-color: #085c0a;
-  font-weight: bold;
-  color: white;
-  font-size: 20px;
-  opacity: 85%;
-}
-.headline {
-  text-align: left;
-}
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    width: 100%;
+  }
 
-.row .col-sm-3 label {
-  color: black;
-  float: left;
-}
-.row .col-sm-6 label {
-  float: left;
-  color: black;
-}
+  .jumbotrontop {
+    font-size: 21px;
+    height: 100%;
+    line-height: 2.1428571435;
+    color: inherit;
+    width: 100%;
+    background-size: cover;
+    z-index: 1;
+  }
+  .container:before {
+    margin-top: 10%;
+    position: relative;
+    content: "";
+    display: block;
+  }
+  /* za singup page*/
+  .container {
+    top: 20%;
+    width: 60%;
+    background-color: rgba(150, 228, 106, 0.712);
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    background-size: contain;
+    position: relative;
+    float: left;
+    color: black
 
-.col-sm-12 p {
-  color: black;
-  text-align: left;
-  font-size: 0.9em;
-  padding-top: 15px;
-}
-.col-sm-12 label,
-span,
-input {
-  float: left;
-  color: black;
-}
-.col-sm-12 div button {
-  margin-top: 15px;
-  color: black;
-  background-color: grey !important;
-  padding: 15px;
-  display: inline-block;
-  border: none !important;
-  border-radius: 40% !important;
-  font-size: 1em !important;
-}
-.row {
-  margin-right: 0px;
-}
-div button:hover {
-  background-color: black;
-  color: white;
-  transition: 0.2;
-}
-.register-left img {
-  width: 300px;
-  margin-left: 150%;
-  margin-top: 250px;
-}
+  }
+  .container:after { 
+    display: block;
+    position: fixed;
+    content: "";
+    
+  
+  }
+  .biglogo {
+    width: 40%;
+    display: block;
+    left: initial;
+    opacity: 1;
+    top: 40%;
+    position: relative;
+    display: -webkit-inline-box;
+    float:right
+  }
+  .regi {
+      padding-bottom: 30px;
+  }
+  html ,#app{ 
+             height: 100%;
+             background: linear-gradient(
+        rgba(187, 223, 120, 0.5),
+        rgba(187, 223, 120, 0.5)
+      ),
+      url("~@/assets/suma.jpg");
+              background-size: cover;
+              width: 100%;
+              background-repeat: no-repeat;
+              position: absolute;
+              }
+              
+  #nav{background-color: rgba(5, 51, 9, 0.9);font-weight: bold;color:white;font-size: 20px;}
+  .headline{text-align: middle;}
+  
+    .row .col-sm-3  label  {
+    color:black;
+    float: left;
+    
+    }
+   .row .col-sm-6 label  {
+    float:left;
+    color: black;
+  }
+  
+  .col-sm-12  p {
+    color:black;
+    text-align: left;
+    font-size: 0.9em;
+    padding-top: 15px;
+  }
+  .col-sm-12  div button {
+    margin-top: 15px;
+    color: black;
+    background-color: grey !important;
+    padding: 15px;
+    display: inline-block;
+    border: none !important;
+    font-size: 1em !important;
+  }
+  div  button:hover {
+    background-color:black;
+    color: white;
+    transition: 0.2;
+  }
 
-/* za login */
+  
+  /* za login */
+ 
 
-/* home */
-.col-md-2 img {
-  margin-top: -50px;
-}
-.col-md-4 .container-fluid {
-  margin-top: 50%;
-  margin-left: 40px;
-  border: 1px solid black;
-  background-color: rgba(150, 228, 106, 0.712);
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 30px;
-}
-.col-md-6 .card {
-  position: relative;
-  background-color: rgba(150, 228, 106, 0.712);
-  border-radius: 30px;
-  display: block;
-  top: 40%;
-  left: 50px;
-  width: 40%;
-  height: 65%;
-}
-.col-md-4 .container-fluid h1 {
-  font-size: 30px;
-  color: black;
-  font-weight: bolder;
-  padding: 20px;
-}
-.divider-text {
-  position: relative;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 40px;
-}
-.divider-text span {
-  padding: 50x;
-  font-size: 15px;
-  position: fixed;
-  z-index: 4;
-  background-color: rgba(150, 228, 106, 0.712);
-}
-.divider-text:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  padding: 5px;
-  top: 55%;
-  left: 0;
-  z-index: 1;
-}
-.btn-facebook {
-  background-color: #405d9d;
-  color: #fff;
-}
-.btn-google {
-  background-color: #7c98a8;
-  color: #fff;
-}
-[class*="col-"] {
-  width: 100%;
-}
+  /* home */
+   .col-md-2 img {
+    margin-top: -10%;
+  }
+  .col-md-4  .container-fluid { 
+    margin-top: 50%;
+    margin-left: 40px;
+    border: 1px solid black;
+    background-color: rgba(150, 228, 106, 0.712);
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 30px;
+  }
+  .col-md-6  .card { 
+    position: relative;
+    background-color: rgba(150, 228, 106, 0.712);
+    border-radius: 30px;
+    display: block;
+    top: 40%;
+    left: 50px;
+    width: 40%;
+    height: 65%;
+  }
+  .col-md-4 .container-fluid h1 {
+    font-size: 30px;
+    color: black;
+    font-weight: bolder;
+    padding: 20px;
+  
+  
+  }
+  .divider-text {
+    position: relative;
+    text-align: center;
+    margin-top:  15px;
+    margin-bottom: 40px;
+  }
+  .divider-text span {
+    padding: 50x;
+    font-size: 15px;
+    position: fixed;
+    z-index: 4;
+    background-color:rgba(150, 228, 106, 0.712);
+  }
+  .divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    padding: 5px;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+  
+  }
+  .btn-facebook {
+    background-color: #405d9d;
+    color: #fff;
+  }
+  .btn-google {
+    background-color: #7c98a8;
+    color: #fff;
+  }
+  
