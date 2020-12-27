@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card bg-light">
+    <div class="card" style="background-color: #424949">
       <article class="card-body mx-auto" style="max-width: 400px;">
         <h4 class="card-title mt-3 text-center">Prijava</h4>
         <p class="text-center">Prijavite se</p>
