@@ -1,90 +1,117 @@
 <template>
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-6 register-left">
-        <img class="biglogo" alt="Vue logo" src="../assets/logo.png" />
+
+<div class="signup__container">
+  <div class="container__child signup__form">
+    <form action="#">
+      <div class="form-group">
+        <label for="username">Ime i Prezime</label>
+        <input class="form-control" type="text" name="username" id="username" placeholder="ime "   v-model="imePrezime" />
       </div>
-      <div class="col-md-6 well">
-        <div class="container jumbotrontop ">
-          <h1 class="headline">Registracija</h1>
-          <div class="row">
-            <form>
-              <div class="col-sm-12">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label id="email">Email Address</label>
-                    <input
-                      type="text"
-                      placeholder="Enter Email Address Here.."
-                      class="form-control"
-                      v-model="email"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label id="pass">Password</label>
-                    <input
-                      type="text"
-                      placeholder="Password"
-                      class="form-control"
-                      v-model="password"
-                    />
-                  </div>
-                  <div class="col-sm-6">
-                    <label id="repeat">Repeat Password</label>
-                    <input
-                      type="text"
-                      placeholder="Password"
-                      class="form-control"
-                      v-model="repeatPassword"
-                    />
-                  </div>
-                </div>
-                <div class="regi">
-                  <button
-                    type="button"
-                    @click="registracija()"
-                    class="btn btn-lg btn-info"
-                  >
-                    Registracija
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="text" name="email" id="email" placeholder="email"   v-model="email" />
       </div>
-    </div>
+      <div class="form-group">
+        <label for="password">Zaporka</label>
+        <input class="form-control" type="password" name="password" id="password"   v-model="password" placeholder="********" required />
+      </div>
+      <div class="form-group">
+        <label for="passwordRepeat">Ponovi zaporku</label>
+        <input class="form-control" type="password" name="passwordRepeat" id="passwordRepeat"  v-model="repeatPassword" placeholder="********" required />
+      </div>
+      <div class="m-t-lg">
+        <ul class="list-inline">
+          <li>
+            <input class="btn btn--form" type="submit" value="Register" />
+          </li>
+          <li>
+            <a class="signup__link" href="#">vec imamm acc</a>
+          </li>
+        </ul>
+      </div>
+    </form>  
   </div>
+</div>
+
+
 </template>
 <style scoped>
-.container {
-  top: 20%;
-  width: 60%;
-  background-color: rgba(150, 228, 106, 0.712);
-  border-radius: 30px;
-  font-size: 1em;
-  font-weight: bold;
-  background-size: contain;
-  position: relative;
-  float: left;
-  color: black;
+
+
+body {
+  font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
+  background: #ffffff;
 }
-.container:after {
-  display: block;
-  position: fixed;
-  content: "";
+a,
+[type="submit"] {transition: all .25s ease-in;}
+.signup__container {
+  position: relative;
+  top: 10%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:70;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
 }
 
-.container:before {
-  margin-top: 10%;
-  position: relative;
-  content: "";
-  display: block;
+
+.heading--primary {font-size: 1.999rem;}
+.heading--secondary {font-size: 1.414rem;}
+.thumbnail__links {
+  align-self: flex-end;
+  width: 100%;
+}
+.thumbnail__links a {
+  font-size: 1rem;
+  color: #fff;
+
+}
+.signup__form {
+  padding: 2.5rem;
+  background: #212529;
+  width: 30%;
+
+}
+label {
+  font-size: .85rem;
+  text-transform: uppercase;
+  color: #ccc;
+}
+.form-control {
+  background-color: transparent;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+  
+}
+[type="text"] {color: #111;}
+[type="password"] {color: #111;}
+.btn--form {
+  padding: .5rem 2.5rem;
+  font-size: .95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  border-radius: remy(35px);
+
+}
+.signup__link {
+  font-size: .8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #999;
 }
 </style>
-
 <script>
 import { firebase } from "@/firebase.js";
 
