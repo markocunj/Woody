@@ -1,35 +1,25 @@
 <template>
   <div id="app">
-    <nav
-      class="navbar navbar-expand-lg navbar-dark"
-      style="background-color: #26272b;"
-    >
-      <a class="navbar-brand" href="#">Woody</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarToggler"
-        aria-controls="navbarToggler"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+    <nav class="navbar navbar-expand-md justify-content-center"  style="background-color: #26272b;">
+    <a href="/" class="navbar-brand d-flex w-50 mr-auto">Woody </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav ml-auto mr-auto">
-          <li class="nav-item">
-            <router-link to="/" class="nav-link">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/ponuda" class="nav-link">Ponuda</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/kontakt" class="nav-link">Kontakt</router-link>
-          </li>
+    </button>
+    <div class="navbar-collapse collapse w-100">
+        <ul class="navbar-nav w-100 justify-content-center">
+            <li class="nav-item active">
+                <router-link to="/" class="nav-link">Home</router-link>
+            </li>
+            <li class="nav-item">
+                  <router-link to="/ponuda" class="nav-link">Ponuda</router-link>
+            </li>
+            <li class="nav-item">
+             <router-link to="/kontakt" class="nav-link">Kontakt</router-link>
+            </li>
         </ul>
-        <a
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+            <li class="nav-item">
+                <a
           v-if="
             !store.currentUser &&
               $router.currentRoute.path != '/prijava' &&
@@ -40,7 +30,7 @@
             <button
               type="button"
               style="background-color: transparent; color: rgba(255,255,255,.5); "
-              class="btn btn-light"
+              class="btn btn-light stisni"
             >
               Prijava
             </button>
@@ -51,18 +41,21 @@
             <button
               type="button"
               style="background-color: transparent; color: rgba(255,255,255,.5); "
-              class="btn btn-light"
+              class="btn btn-light stisni"
             >
               Odjava
             </button>
           </router-link>
         </a>
-      </div>
-    </nav>
-    <router-view />
+            </li>
+        </ul>
+    </div>
+</nav>
+ <router-view />
     <WoodyFooter />
   </div>
 </template>
+
 
 <script>
 import WoodyFooter from "@/components/WoodyFooter.vue";
@@ -106,4 +99,17 @@ export default {
 <style lang="scss">
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";
+@media (min-width: 768px) {
+.navbar-brand.abs
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+    }
+}
+
+nav a:hover {
+  color:purple;
+}
 </style>
