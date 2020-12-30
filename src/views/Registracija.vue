@@ -22,7 +22,7 @@
       <div class="m-t-lg">
         <ul class="list-inline">
           <li>
-            <input class="btn btn--form" type="submit" value="Register" />
+            <input class="btn btn--form" type="button" value="Register" />
           </li>
           <li>
             <a class="signup__link" href="#">vec imamm acc</a>
@@ -77,7 +77,7 @@ a,
 .signup__form {
   padding: 2.5rem;
   background: #212529;
-  width: 30%;
+  min-width: 299px;
 
 }
 label {
@@ -103,7 +103,7 @@ label {
   color: #fff;
   background: #111;
   border-radius: remy(35px);
-
+  width: calc(50%-8px);
 }
 .signup__link {
   font-size: .8rem;
