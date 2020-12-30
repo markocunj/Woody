@@ -99,15 +99,7 @@ export default {
 <style lang="scss">
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";
-@media (min-width: 768px) {
-.navbar-brand.abs
-    {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        text-align: center;
-    }
-}
+
 
 nav a:hover {
   color:purple;
