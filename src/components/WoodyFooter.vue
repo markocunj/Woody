@@ -99,7 +99,7 @@ export default {
 <style>
 /* Pocetak Footera */
 .site-footer {
-   background-color: #26272b;
+  background-color: #26272b;
   padding: 45px 0 20px;
   font-size: 15px;
   line-height: 24px;
@@ -107,7 +107,6 @@ export default {
   width: 100%;
   bottom: 0;
   left: 0;
-
 }
 .site-footer hr {
   border-top-color: #bbb;

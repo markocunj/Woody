@@ -19,8 +19,6 @@ html,
   z-index: 1;
 }
 
-/* za singup page*/
-
 .biglogo {
   width: 40%;
   display: block;
@@ -38,7 +36,6 @@ html,
 .headline {
   text-align: middle;
 }
-
 .row .col-sm-3 label {
   color: black;
   float: left;
@@ -68,8 +65,6 @@ div button:hover {
   color: white;
   transition: 0.2;
 }
-
-/* za login */
 
 /* home */
 .col-md-2 img {
@@ -122,12 +117,4 @@ div button:hover {
   top: 55%;
   left: 0;
   z-index: 1;
-}
-.btn-facebook {
-  background-color: #405d9d;
-  color: #fff;
-}
-.btn-google {
-  background-color: #7c98a8;
-  color: #fff;
 }

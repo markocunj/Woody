@@ -34,15 +34,15 @@
           />
         </div>
         <!-- form-group// -->
-        <div class="form-group">
-          <button
-            type="button"
-            class="btn btn-primary btn-block"
-            @click="prijava"
-          >
-            Prijava
-          </button>
-        </div>
+        <button
+          type="button"
+          class="btn btn-primary btn-block"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          @click="prijava()"
+        >
+          Prijava
+        </button>
         <p class="divider-text">
           <span class="bg-light">ILI</span>
         </p>
@@ -64,6 +64,7 @@ import { firebase } from "@/firebase.js";
 import Home from "@/views/Home.vue";
 
 export default {
+  name: "Prijava",
   data() {
     return {
       email: "",
@@ -76,12 +77,10 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((result) => {
-          console.log("Uspješna prijava");
           this.$router.replace({ name: "Home" });
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.error("Došlo je do greške", error);
-          alert(error.message);
         });
       console.log("Nastavak");
     },

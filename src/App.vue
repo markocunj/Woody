@@ -29,13 +29,7 @@
             <router-link to="/kontakt" class="nav-link">Kontakt</router-link>
           </li>
         </ul>
-        <a
-          v-if="
-            !store.currentUser &&
-              $router.currentRoute.path != '/prijava' &&
-              $router.currentRoute.path != '/registracija'
-          "
-        >
+        <a v-if="!store.currentUser">
           <router-link to="/prijava">
             <button
               type="button"
@@ -46,7 +40,22 @@
             </button>
           </router-link>
         </a>
-        <a v-if="store.currentUser" href="#" @click.prevent="odjava()">
+        <a v-if="store.currentUser">
+          <router-link to="/profil">
+            <button
+              type="button"
+              style="background-color: transparent; color: rgba(255,255,255,.5); "
+              class="btn btn-light"
+            >
+              Profil
+            </button>
+          </router-link>
+        </a>
+        <a
+          v-if="store.currentUser && $router.currentRoute.path == '/profil'"
+          href="#"
+          @click.prevent="odjava()"
+        >
           <router-link to="/home">
             <button
               type="button"
@@ -69,7 +78,6 @@ import WoodyFooter from "@/components/WoodyFooter.vue";
 import { firebase } from "@/firebase";
 import router from "@/router";
 import store from "@/store.js";
-
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email);
@@ -79,7 +87,6 @@ firebase.auth().onAuthStateChanged((user) => {
     store.currentUser = null;
   }
 });
-
 export default {
   name: "App",
   data() {

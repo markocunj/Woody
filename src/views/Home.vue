@@ -1,8 +1,4 @@
-<template>
-  <div class="home">
-    <p style="color: #fff">Home</p>
-  </div>
-</template>
+<template> </template>
 
 <script>
 export default {

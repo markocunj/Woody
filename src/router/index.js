@@ -5,6 +5,7 @@ import Ponuda from "../views/Ponuda.vue";
 import Prijava from "../views/Prijava.vue";
 import Registracija from "../views/Registracija.vue";
 import Kontakt from "../views/Kontakt.vue";
+import Profil from "../views/Profil.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: "/kontakt",
     name: "Kontakt",
     component: Kontakt,
+  },
+  {
+    path: "/profil",
+    name: "Profil",
+    component: Profil,
   },
 ];
 
