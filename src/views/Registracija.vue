@@ -9,7 +9,8 @@
             type="text"
             name="username"
             id="username"
-            placeholder="Ime i prezime"
+            placeholder="ime "
+            v-model="imePrezime"
           />
         </div>
         <div class="form-group">
@@ -19,7 +20,7 @@
             type="text"
             name="email"
             id="email"
-            placeholder="E-mail adresa"
+            placeholder="email"
             v-model="email"
           />
         </div>
@@ -31,7 +32,7 @@
             name="password"
             id="password"
             v-model="password"
-            placeholder="Password"
+            placeholder="********"
             required
           />
         </div>
@@ -43,25 +44,17 @@
             name="passwordRepeat"
             id="passwordRepeat"
             v-model="repeatPassword"
-            placeholder="Repeat password"
+            placeholder="********"
             required
           />
         </div>
         <div class="m-t-lg">
           <ul class="list-inline">
             <li>
-              <input
-                class="btn btn--form"
-                type="button"
-                @click="registracija()"
-                value="Registracija"
-              />
+              <input class="btn btn--form" type="button" value="Register" />
             </li>
             <li>
-              <a class="signup__link" style="color: white;">
-                Imate račun?
-                <router-link to="/prijava">Prijavite se</router-link></a
-              >
+              <a class="signup__link" href="#">vec imamm acc</a>
             </li>
           </ul>
         </div>
@@ -69,44 +62,6 @@
     </div>
   </div>
 </template>
-
-<script>
-import { firebase } from "@/firebase.js";
-
-export default {
-  name: "Registracija",
-  data() {
-    return {
-      email: "",
-      password: "",
-      repeatPassword: "",
-      imePreizme: "",
-      errorMessage: "",
-    };
-  },
-  methods: {
-    registracija() {
-      if (this.password == this.repeatPassword) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then((user) => {
-            console.log("Uspješna registracija");
-
-            this.$router.replace({ name: "Prijava" });
-          })
-          .catch(function(error) {
-            console.error("Došlo je do greške", error);
-          });
-        console.log("Nastavak");
-      } else {
-        alert("Password nije jednak repeat passwordu.");
-      }
-    },
-  },
-};
-</script>
-
 <style scoped>
 body {
   font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
@@ -149,7 +104,7 @@ a,
 .signup__form {
   padding: 2.5rem;
   background: #212529;
-  width: 30%;
+  min-width: 299px;
 }
 label {
   font-size: 0.85rem;
@@ -182,6 +137,41 @@ label {
 .signup__link {
   font-size: 0.8rem;
   font-weight: 600;
-  color: rgb(255, 255, 255);
+  text-decoration: underline;
+  color: #999;
 }
 </style>
+<script>
+import { firebase } from "@/firebase.js";
+export default {
+  name: "Registracija",
+  data() {
+    return {
+      email: "",
+      password: "",
+      repeatPassword: "",
+    };
+  },
+  methods: {
+    registracija() {
+      if (this.password == this.repeatPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then((user) => {
+            console.log("Uspješna registracija");
+            alert("Uspješna registracija");
+            this.$router.replace({ name: "Prijava" });
+          })
+          .catch(function(error) {
+            console.error("Došlo je do greške", error);
+            alert(error.message);
+          });
+        console.log("Nastavak");
+      } else {
+        alert("Password nije jednak repeat passwordu.");
+      }
+    },
+  },
+};
+</script>
