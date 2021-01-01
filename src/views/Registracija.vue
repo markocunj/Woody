@@ -177,6 +177,7 @@ label {
   color: #fff;
   background: #111;
   border-radius: remy(35px);
+  width: calc(50%-8px);
 }
 .signup__link {
   font-size: 0.8rem;
