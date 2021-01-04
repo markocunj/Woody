@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="row">
     <product-card v-for="card in cards" :key="card" :info="card" />
   </div>
 </template>
