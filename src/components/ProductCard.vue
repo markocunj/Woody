@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
-        <div class="card">
-          <img class="card-img" :src="info.url" />
-          <div class="card-body">
+   <div class="col-md-3 mb-4">
+        <div class="product">
+          <img class="card-img img-fluid w-100" :src="info.url" />
+          <div class="card-body pt-4">
             <h4 class="card-title">{{ info.naslov }}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">{{ info.podnaslov }}</h6>
+            <h6 class="mb-2 ">{{ info.podnaslov }}</h6>
             <p class="card-text">
               {{ info.opis }}
             </p>
@@ -27,29 +25,79 @@
               <div class="price text-success">
                 <h5 class="mt-4">{{ info.cijena }}</h5>
               </div>
-              <a href="#" class="btn btn-danger mt-3"
+              <a href="#" class="btn btn-danger mt-1  btn-sm mr-1 mb-2"
                 ><i class="fas fa-shopping-cart"></i> Add to Cart</a
               >
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <style scoped>
-.container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-body {
-  padding: 2rem 0rem;
-}
+.col-md-3 {
+    margin-top: 1vw;
+  }
+  .card-text {
+    height: 12vh;
+  }
+  .product {
+    background:black;
+  }
+  .col-mid-3 img {
+    width: 70%;
+  }
+  .align-items-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .justify-content-around {
+    -ms-flex-pack: distribute !important;
+    justify-content: space-around !important;
+  }
+  .d-flex {
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+  .mb-4,
+  .my-4 {
+    margin-bottom: 1.5rem !important;
+  }
 
-.like {
-  font-size: 1.5rem;
-}
+  .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  img {
+    vertical-align: middle;
+    border-style: none;
+    padding: 30px 30px 0px 30px;
+    box-shadow: 5vw white;
+  }
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+  .text-center {
+    text-align: center !important;
+  }
+  .pt-4,
+  .py-4 {
+    padding-top: 1.5rem !important;
+  }
 </style>
 
 <script>
