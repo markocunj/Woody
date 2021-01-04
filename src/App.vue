@@ -1,20 +1,20 @@
 <template>
   <div id="app">
     <nav
-      class="navbar navbar-expand-md justify-content-center"
+      class="navbar navbar-expand-md justify-content-center "
       style="background-color: #26272b"
     >
       <a href="/" class="navbar-brand d-flex w-50 mr-auto">Woody </a>
       <button
         class="navbar-toggler"
         type="button"
-        data-toggle="collapse"
-        data-target="#collapsingNavbar3"
+        data-target="#navbarToggler"
+        data-toggle="collapse" 
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse w-100">
-        <ul class="navbar-nav w-100 justify-content-center">
+      <div class="navbar-collapse collapse w-100" id="navbarToggler">
+        <ul class="nav navbar-nav w-100 justify-content-center">
           <li class="nav-item active">
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
