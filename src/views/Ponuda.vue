@@ -26,7 +26,7 @@ cards = [
     cijena: "430kn/m",
   },
   {
-    url: "https://ibb.co/Dt9VHDv",
+    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
     naslov: "Jasen",
     podnaslov: "Drvo za ogrijev jasen",
     opis:
@@ -34,7 +34,7 @@ cards = [
     cijena: "380kn/m",
   },
   {
-    url: "https://ibb.co/Dt9VHDv",
+    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
     naslov: "Hrast",
     podnaslov: "Drvo za ogrijev hrast",
     opis:

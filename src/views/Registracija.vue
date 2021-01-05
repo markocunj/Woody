@@ -10,7 +10,6 @@
             name="username"
             id="username"
             placeholder="ime "
-            v-model="imePrezime"
           />
         </div>
         <div class="form-group">

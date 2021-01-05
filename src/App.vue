@@ -9,7 +9,7 @@
         class="navbar-toggler"
         type="button"
         data-target="#navbarToggler"
-        data-toggle="collapse" 
+        data-toggle="collapse"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -30,8 +30,8 @@
             <a
               v-if="
                 !store.currentUser &&
-                $router.currentRoute.path != '/prijava' &&
-                $router.currentRoute.path != '/registracija'
+                  $router.currentRoute.path != '/prijava' &&
+                  $router.currentRoute.path != '/registracija'
               "
             >
               <router-link to="/prijava">
@@ -39,7 +39,7 @@
                   type="button"
                   style="
                     background-color: transparent;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: #daa520;;
                   "
                   class="btn btn-light stisni"
                 >
@@ -133,7 +133,14 @@ export default {
 <style lang="scss">
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";
+.nav-link {
+  color: #daa520;
+}
+.navbar-brand {
+  color: #daa520;
+}
+
 nav a:hover {
-  color: purple;
+  color: #ccc;
 }
 </style>
