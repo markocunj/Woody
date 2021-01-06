@@ -15,29 +15,17 @@
         </div>
 
         <div class="col-xs-6 col-md-3">
-          <h6>Categories</h6>
+          <h6>Vrste drva za prodaju</h6>
           <ul class="footer-links">
-            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+            <li>Bukva</li>
             <li>
-              <a href="http://scanfcode.com/category/front-end-development/"
-                >UI Design</a
-              >
+              Grab
             </li>
             <li>
-              <a href="http://scanfcode.com/category/back-end-development/"
-                >PHP</a
-              >
+              Jasen
             </li>
             <li>
-              <a href="http://scanfcode.com/category/java-programming-language/"
-                >Java</a
-              >
-            </li>
-            <li>
-              <a href="http://scanfcode.com/category/android/">Android</a>
-            </li>
-            <li>
-              <a href="http://scanfcode.com/category/templates/">Templates</a>
+              Hrast
             </li>
           </ul>
         </div>
@@ -45,16 +33,15 @@
         <div class="col-xs-6 col-md-3">
           <h6>Brzi linkovi</h6>
           <ul class="footer-links">
-            <li><a href="http://scanfcode.com/about/">O nama</a></li>
             <li>
-              <a href="http://scanfcode.com/contact/">Kontaktirajte nas</a>
+              <router-link to="/kontakt"> Kontaktirajte nas</router-link>
             </li>
             <li>
               <a href="http://scanfcode.com/privacy-policy/"
                 >Polica privatnosti</a
               >
             </li>
-            <li><a href="http://scanfcode.com/sitemap/">Ponuda</a></li>
+            <li><router-link to="ponuda">Ponuda</router-link></li>
           </ul>
         </div>
       </div>
@@ -76,9 +63,6 @@
             </li>
             <li>
               <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-              <a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a>
             </li>
             <li>
               <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
@@ -142,7 +126,7 @@ export default {
 .footer-links a:active,
 .footer-links a:focus,
 .footer-links a:hover {
-  color: #3366cc;
+  color: #daa520;
   text-decoration: none;
 }
 .footer-links.inline li {

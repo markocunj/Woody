@@ -200,6 +200,21 @@
                   Bay Area, San Francisco, CA
                 </div>
               </div>
+              <a
+                v-if="
+                  store.currentUser && $router.currentRoute.path == '/profil'
+                "
+                href="#"
+                @click.prevent="odjava()"
+              >
+                <button
+                  type="button"
+                  class="btn btn-dark"
+                  style="margin-top:30px;"
+                >
+                  <router-link to="/home"> Odjava </router-link>
+                </button>
+              </a>
             </div>
           </div>
           <div class="row gutters-sm">
@@ -339,7 +354,29 @@
     </div>
   </div>
 </template>
-
+<script>
+import { firebase } from "@/firebase";
+import router from "@/router";
+import store from "@/store.js";
+export default {
+  name: "Profil",
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    odjava() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Prijava" });
+        });
+    },
+  },
+};
+</script>
 <style scoped>
 body {
   margin-top: 20px;
