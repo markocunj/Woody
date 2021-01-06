@@ -160,7 +160,6 @@ export default {
           .then((user) => {
             console.log("Uspješna registracija");
             alert("Uspješna registracija");
-            this.$router.replace({ name: "Prijava" });
           })
           .catch(function(error) {
             console.error("Došlo je do greške", error);

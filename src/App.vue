@@ -26,7 +26,7 @@
           </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-          <li class="nav-item">
+          <li class="nav-item gumb">
             <a
               v-if="
                 !store.currentUser &&
@@ -35,14 +35,7 @@
               "
             >
               <router-link to="/prijava">
-                <button
-                  type="button"
-                  style="
-                    background-color: transparent;
-                    color: #daa520;;
-                  "
-                  class="btn btn-light stisni"
-                >
+                <button type="button" class="btn btn-light">
                   Prijava
                 </button>
               </router-link>
@@ -50,35 +43,9 @@
 
             <a v-if="store.currentUser">
               <router-link to="/profil">
-                <button
-                  type="button"
-                  style="
-                    background-color: transparent;
-                    color: rgba(255, 255, 255, 0.5);
-                  "
-                  class="btn btn-light stisni"
-                >
+                <button type="button" class="btn btn-light">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   Profil
-                </button>
-              </router-link>
-            </a>
-
-            <a
-              v-if="store.currentUser && $router.currentRoute.path == '/profil'"
-              href="#"
-              @click.prevent="odjava()"
-            >
-              <router-link to="/home">
-                <button
-                  type="button"
-                  style="
-                    background-color: transparent;
-                    color: rgba(255, 255, 255, 0.5);
-                  "
-                  class="btn btn-light stisni"
-                >
-                  Odjava
                 </button>
               </router-link>
             </a>
@@ -98,12 +65,21 @@ import router from "@/router";
 import store from "@/store.js";
 
 firebase.auth().onAuthStateChanged((user) => {
+  const currentRoute = router.currentRoute;
   if (user) {
     console.log(user.email);
     store.currentUser = user.email;
+
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "Home" });
+    }
   } else {
     console.log("No user");
     store.currentUser = null;
+
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "Prijava" });
+    }
   }
 });
 
@@ -142,5 +118,18 @@ export default {
 
 nav a:hover {
   color: #ccc;
+}
+.btn-light:hover {
+  background-color: #ccc;
+  color: #daa520;
+}
+
+.btn-light {
+  background-color: transparent;
+  color: #daa520;
+}
+.btn-light:hover {
+  background-color: #ccc;
+  color: black;
 }
 </style>
