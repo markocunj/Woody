@@ -65,57 +65,33 @@ div button:hover {
   color: white;
   transition: 0.2;
 }
+/*Transition
 
-/*
-.col-md-2 img {
-  margin-top: -10%;
+.animate-in {
+  -webkit-animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.5s ease-in;
 }
-.col-md-4 .container-fluid {
-  margin-top: 50%;
-  margin-left: 40px;
-  border: 1px solid black;
-  border-radius: 30px;
-  font-size: 15px;
-  font-weight: bold;
-  padding: 30px;
+
+.animate-out {
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  opacity: 0;
 }
-.col-md-6 .card {
-  position: relative;
-  background-color: rgba(150, 228, 106, 0.712);
-  border-radius: 30px;
-  display: block;
-  top: 40%;
-  left: 50px;
-  width: 40%;
-  height: 65%;
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-.col-md-4 .container-fluid h1 {
-  font-size: 30px;
-  color: black;
-  font-weight: bolder;
-  padding: 20px;
-}
-.divider-text {
-  position: relative;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 40px;
-}
-.divider-text span {
-  padding: 50x;
-  font-size: 15px;
-  position: fixed;
-  z-index: 4;
-  background-color: rgba(150, 228, 106, 0.712);
-}
-.divider-text:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  padding: 5px;
-  top: 55%;
-  left: 0;
-  z-index: 1;
-}
-*/
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}*/

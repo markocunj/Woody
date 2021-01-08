@@ -8,3 +8,10 @@
     width: 37%;
   }
 }
+@media (min-width: 750px) {
+  .red {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+}

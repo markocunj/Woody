@@ -1,33 +1,40 @@
 <template>
   <div class="col-md-3 mb-4">
-    <div class="container mx-auto">
+    <div class="container">
       <div class="product">
         <div class="card-body pt-4">
           <h4 class="card-title">{{ info.naslov }}</h4>
+          <h5
+            class="mb-2"
+            style="color: black; font-weight: bold;  padding: 10px"
+          >
+            <i class="fas fa-tag" style="color: red;"></i> {{ info.cijena }}
+            <a style="color: #424949; font-weight: normal;">/metar</a>
+          </h5>
           <h6 class="mb-2 ">{{ info.podnaslov }}</h6>
+
           <p class="card-text">
             {{ info.opis }}
           </p>
           <div class="options d-flex flex-fill">
-            <input name="" class="custom-select ml-1" placeholder="Količina" />
+            <input
+              name=""
+              class="custom-select ml-1"
+              placeholder="Količina (u metrima)"
+            />
             <select class="custom-select ml-1">
-              <option selected>Veličina</option>
+              <option selected>Dužina</option>
               <option value="1">25</option>
               <option value="2">33</option>
               <option value="3">45</option>
             </select>
           </div>
-          <div class="buy d-flex justify-content-between align-items-center">
-            <div class="price text-success">
-              <h5 class="mt-4" style="color: black; font-weight: bold;">
-                {{ info.cijena }}
-              </h5>
-            </div>
+          <div class="buy d-flex justify-content-center align-items-center">
             <a
               href="#"
-              class="btn btn-secondary mt-1  btn-sm mr-1 mb-2"
+              class="btn btn-secondary mt-4  btn-sm mr-1 mb-2"
               style=""
-              ><i class="fas fa-shopping-cart"></i> Add to Cart</a
+              ><i class="fas fa-shopping-cart"></i> Dodavanje u košaricu</a
             >
           </div>
         </div>
@@ -42,23 +49,21 @@
   background-image: url("../assets/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.7;
   width: 100%;
-  height: 500px;
+  height: 600px;
+}
+.container:hover {
+  box-shadow: 0 8px 12px 0 #daa520;
 }
 .col-md-3 {
   margin-top: 1vw;
 }
 .card-text {
-  height: 12vh;
+  height: 100px;
 }
 .product {
-  background-color: #daa520;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-.col-mid-3 img {
-  width: 70%;
+  background: #daa520;
+  transform: translateY(30%);
 }
 .align-items-center {
   -ms-flex-align: center !important;
@@ -76,29 +81,6 @@
 .my-4 {
   margin-bottom: 1.5rem !important;
 }
-
-.row {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-.img-fluid {
-  max-width: 100%;
-  height: auto;
-}
-img {
-  vertical-align: middle;
-  border-style: none;
-  padding: 30px 30px 0px 30px;
-  box-shadow: 5vw white;
-}
 *,
 ::after,
 ::before {
@@ -110,6 +92,18 @@ img {
 .pt-4,
 .py-4 {
   padding-top: 1.5rem !important;
+}
+.red {
+  display: flex;
+  flex-wrap: wrap;
+}
+@media (max-width: 1270px) {
+  .col-md-3 {
+    max-width: 100%;
+  }
+  .container {
+    min-width: 345px;
+  }
 }
 </style>
 
