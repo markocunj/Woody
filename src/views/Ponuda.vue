@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <product-card v-for="card in cards" :key="card" :info="card" />
+    <product-card v-for="(card, idx) in cards" :key="idx" :info="card" />
   </div>
 </template>
 <script>
@@ -14,32 +14,32 @@ cards = [
     naslov: "Bukva",
     podnaslov: "Drvo za ogrijev bukva",
     opis:
-      "Drvo za ogrijev bukva, odlično za brzo podizanje temperature. Veličinu i količinu birate sami.",
-    cijena: "430kn/m",
+      "Drvo za ogrijev bukva, odlično za brzo podizanje temperature. Dužinu i količinu birate sami.",
+    cijena: "430kn",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
     naslov: "Grab",
     podnaslov: "Drvo za ogrijev grab",
     opis:
-      "Drvo za ogrijev grab, odlično za držanje visoke temperature gorenja na duže vrijeme. Veličinu i količinu birate sami.",
-    cijena: "430kn/m",
+      "Drvo za ogrijev grab, odlično za držanje visoke temperature gorenja na duže vrijeme. Dužinu i količinu birate sami.",
+    cijena: "430kn",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
     naslov: "Jasen",
     podnaslov: "Drvo za ogrijev jasen",
     opis:
-      "Najbolje u kombinaciji sa grabom/bukvom za odlične rezultate dugoročnog gorijenja. Veličinu i količinu birate sami.",
-    cijena: "380kn/m",
+      "Najbolje u kombinaciji sa grabom/bukvom za odlične rezultate dugoročnog gorijenja. Dužinu i količinu birate sami.",
+    cijena: "380kn",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
     naslov: "Hrast",
     podnaslov: "Drvo za ogrijev hrast",
     opis:
-      "Najbolje drvo, uz bukvu i grab, za hladne zimske dane (pogotovo ako je suho). Veličinu i količinu birate sami.",
-    cijena: "400kn/m",
+      "Najbolje drvo, uz bukvu i grab, za hladne zimske dane (pogotovo ako je suho). Dužinu i količinu birate sami.",
+    cijena: "400kn",
   },
 ];
 

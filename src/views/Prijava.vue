@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-light">
+  <div class="card" style="background-color: #424949;">
     <article class="card-body mx-auto" style="max-width: 400px">
       <h4 class="card-title mt-3 text-center light">Prijava</h4>
       <p class="text-center">
@@ -43,9 +43,7 @@
         >
           Prijava
         </button>
-        <p class="divider-text">
-          <span class="bg-light">ILI</span>
-        </p>
+        <p class="divider-text" style="padding-bottom: 15px;"></p>
         <p>
           <a href="" class="btn btn-block btn-google">
             <i class="fab fa-google"></i> Login via Google</a

@@ -14,8 +14,5 @@
     flex-wrap: wrap;
     flex-direction: row;
   }
-  .container {
-    width: calc(33.3333% - 16px);
-  }
 }
 
