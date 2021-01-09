@@ -63,22 +63,20 @@
                     >
                     <div class="form-control">Marko Cunj</div>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
                       >Email</label
                     >
                     <div class="form-control">marko.cunj@gmail.com</div>
                   </div>
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
                       >Adresa</label
                     >
                     <div class="form-control">Ščapovec 1</div>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
                       >Županija</label
@@ -91,15 +89,29 @@
                     >
                     <div class="form-control">Hrvatska</div>
                   </div>
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520">Zip</label>
                     <div class="form-control">52211</div>
                   </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <button
+                      type="button"
+                      class="btn btn-block"
+                      style="border: 1px solid #daa520; "
+                      @click="odjava()"
+                    >
+                      Odjava
+                    </button>
+                  </div>
+                </div>
                 <hr class="my-4" style="border-color:black" />
               </div>
               <div
-                class="tab-pane fade show active"
+                class="tab-pane fade"
                 id="info"
                 role="tabpanel"
                 aria-labelledby="info-tab"
@@ -128,20 +140,12 @@
                 <div class="row mb-4">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label for="inputPassword4">Old Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="inputPassword5"
-                        style="border: 1px solid gray;"
-                      />
-                    </div>
-                    <div class="form-group">
                       <label for="inputPassword5">New Password</label>
                       <input
                         type="password"
                         class="form-control"
                         id="inputPassword5"
+                        v-model="newPassword"
                         style="border: 1px solid gray;"
                       />
                     </div>
@@ -151,6 +155,7 @@
                         type="password"
                         class="form-control"
                         id="inputPassword6"
+                        v-model="confirmPassword"
                         style="border: 1px solid gray;"
                       />
                     </div>
@@ -172,7 +177,11 @@
                     </ul>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  @click="promjenaLozinke()"
+                >
                   Save Change
                 </button>
               </div>
@@ -192,6 +201,8 @@ export default {
   data() {
     return {
       store,
+      newPassword: "",
+      confirmPassword: "",
     };
   },
   methods: {
@@ -200,8 +211,28 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push({ name: "Prijava" });
+          this.$router.push({ name: "Home" });
         });
+    },
+    promjenaLozinke() {
+      var user = firebase.auth().currentUser;
+      if (this.newPassword == this.confirmPassword) {
+        user
+          .updatePassword(this.newPassword)
+          .then(() => {
+            alert("Usspješna promjena.");
+            this.newPassword = "";
+            this.confirmPassword = "";
+          })
+          .catch((error) => {
+            console.error(error);
+            alert(error.message);
+          });
+      } else {
+        alert("Lozinke moraju biti jednake");
+        this.newPassword = "";
+        this.confirmPassword = "";
+      }
     },
   },
 };
@@ -226,6 +257,10 @@ img {
 }
 .text-muted {
   font-weight: 300;
+}
+.btn:hover {
+  background-color: #4d5154;
+  color: white;
 }
 .form-control {
   display: block;

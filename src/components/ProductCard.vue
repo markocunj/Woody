@@ -106,15 +106,6 @@
   }
 }
 </style>
-
-<script>
-import background from "@/assets/background.jpg";
-export default {
-  props: ["info"],
-  name: "ProductCard",
-};
-</style>
-
 <script>
 import background from "@/assets/background.jpg";
 export default {
