@@ -1,4 +1,4 @@
 export default {
   currentUser: null,
-  addingToCart: "",
+  addingToCart: [],
 };

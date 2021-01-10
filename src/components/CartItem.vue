@@ -2,10 +2,10 @@
   <div class="form-row">
     <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-8">
       <h4 class="product-name">
-        <strong>{{ cart.naslov }}</strong>
+        <strong>{{ cartInfo.naslov }}</strong>
       </h4>
       <h4>
-        <small>{{ cart.podnaslov }}</small>
+        <small>{{ cartInfo.podnaslov }}</small>
       </h4>
     </div>
     <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
@@ -15,44 +15,23 @@
       >
         <h6>
           <strong
-            ><span class="text-muted">{{ cart.cijena }}</span></strong
+            ><span class="text-muted">{{ cartInfo.cijena }}</span></strong
           >
         </h6>
       </div>
-      <a v-if="store.addingToCart">
-        <div class="col-2 col-sm-2 col-md-4 text-right">
-          <button
-            type="button"
-            class="btn btn-outline-danger btn-xs"
-            @click="brisanje()"
-          >
-            <i class="fa fa-trash" aria-hidden="true"></i>
-          </button></div
-      ></a>
     </div>
   </div>
 </template>
 
 <script>
 import store from "@/store";
-
 export default {
+  props: ["cartInfo"],
   name: "CartItem",
   data() {
     return {
-      cart: [],
       store,
     };
-  },
-
-  mounted() {
-    this.cart = store.addingToCart;
-  },
-  methods: {
-    brisanje() {
-      this.cart = [];
-      store.addingToCart = "";
-    },
   },
 };
 </script>

@@ -27,7 +27,7 @@
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
           <li class="nav-item">
-            <router-link to="/kosarica">Kosarica</router-link>
+            <router-link to="/kosarica" class="nav-link">Kosarica</router-link>
           </li>
           <li class="nav-item gumb">
             <a
@@ -74,7 +74,6 @@ firebase.auth().onAuthStateChanged((user) => {
     store.currentUser = user.email;
 
     if (!currentRoute.meta.needsUser) {
-      router.push({ name: "Home" });
     }
   } else {
     console.log("No user");

@@ -48,6 +48,7 @@
 <script>
 import background from "@/assets/background.jpg";
 import store from "@/store";
+
 export default {
   name: "ProductCard",
   data() {
@@ -60,8 +61,7 @@ export default {
 
   methods: {
     addingToCart() {
-      let addingItem = [];
-
+      let addingItem = {};
       addingItem = {
         kolicina: this.kolicina,
         duzina: this.duzina,
@@ -69,8 +69,8 @@ export default {
         naslov: this.info.naslov,
         podnaslov: this.info.podnaslov,
       };
-      console.log("Uspjesno dodavanje", addingItem);
-      store.addingToCart = addingItem;
+      console.log("Item added");
+      store.addingToCart.push(addingItem);
     },
   },
 };

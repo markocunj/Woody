@@ -11,13 +11,17 @@
       </div>
       <div class="card-body">
         <!-- PRODUCT -->
-        <cart-item />
+        <cart-item v-for="cart in carts" :key="cart.naslov" :cartInfo="cart" />
         <hr />
         <!-- END PRODUCT -->
         <div class="pull-right">
-          <a href="" class="btn btn-outline-secondary pull-right">
-            Update shopping cart
-          </a>
+          <button
+            type="button"
+            class="btn btn-outline-danger btn-xs"
+            @click="brisanje()"
+          >
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
       <div class="card-footer">
@@ -38,12 +42,31 @@
 
 <script>
 import CartItem from "@/components/CartItem.vue";
+import store from "@/store";
 
 export default {
   name: "ShoppingCart",
-
+  data() {
+    return {
+      carts: [],
+    };
+  },
+  mounted() {
+    if (store.addingToCart) {
+      for (let i = 0; i < store.addingToCart.length; i++) {
+        this.carts.push(store.addingToCart[i]);
+        console.log("Uspjeh");
+      }
+    }
+  },
   components: {
     CartItem,
+  },
+  methods: {
+    brisanje() {
+      this.carts = [];
+      store.addingToCart = [];
+    },
   },
 };
 </script>
