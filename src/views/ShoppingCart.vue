@@ -2,19 +2,18 @@
   <div class="container">
     <div class="card shopping-cart">
       <div class="card-header bg-dark text-light">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        <i
+          class="fa fa-shopping-cart justify-content-center"
+          aria-hidden="true"
+        ></i>
         Shopping cart
-        <a href="" class="btn btn-outline-info btn-sm pull-right"
-          >Continue shopping</a
-        >
         <div class="clearfix"></div>
       </div>
       <div class="card-body">
         <!-- PRODUCT -->
-        <cart-item v-for="cart in carts" :key="cart.naslov" :cartInfo="cart" />
-        <hr />
+        <cart-item v-for="cart in carts" :key="cart.id" :cartInfo="cart" />
         <!-- END PRODUCT -->
-        <div class="pull-right">
+        <div class="pull-right" v-if="carts">
           <button
             type="button"
             class="btn btn-outline-danger btn-xs"
@@ -32,7 +31,7 @@
         </div>
         <div class="form-row justify-content-left">
           <div class="pull-left" style="margin-top: 15px">
-            Total price: <b>50.00€</b>
+            Konačna cijena: <b>{{ konacnaCijena }}kn</b>
           </div>
         </div>
       </div>
@@ -43,12 +42,14 @@
 <script>
 import CartItem from "@/components/CartItem.vue";
 import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "ShoppingCart",
   data() {
     return {
       carts: [],
+      konacnaCijena: 0,
     };
   },
   mounted() {
@@ -56,6 +57,7 @@ export default {
       for (let i = 0; i < store.addingToCart.length; i++) {
         this.carts.push(store.addingToCart[i]);
         console.log("Uspjeh");
+        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
       }
     }
   },
@@ -66,6 +68,8 @@ export default {
     brisanje() {
       this.carts = [];
       store.addingToCart = [];
+      this.konacnaCijena = 0;
+      store.cartNumber = 0;
     },
   },
 };
@@ -135,5 +139,9 @@ export default {
 }
 .shopping-cart {
   margin-top: 20px;
+}
+
+.container {
+  margin-bottom: 30px;
 }
 </style>

@@ -15,7 +15,7 @@
       >
         <h6>
           <strong
-            ><span class="text-muted">{{ cartInfo.cijena }}</span></strong
+            ><span class="text-muted">{{ cartInfo.cijena }}kn</span></strong
           >
         </h6>
       </div>

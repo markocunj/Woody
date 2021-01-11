@@ -26,8 +26,13 @@
           </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-          <li class="nav-item">
-            <router-link to="/kosarica" class="nav-link">Kosarica</router-link>
+          <li class="nav-item" v-if="store.cartNumber != 0">
+            <router-link to="/kosarica" class="nav-link"
+              ><i class="fas fa-shopping-cart" style="font-size:24px"></i>
+              <span class="badge badge-warning" id="lblCartCount">
+                {{ store.cartNumber }}
+              </span></router-link
+            >
           </li>
           <li class="nav-item gumb">
             <a
@@ -136,5 +141,25 @@ nav a:hover {
 }
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+  font-size: 12px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -10px;
 }
 </style>

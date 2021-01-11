@@ -71,6 +71,7 @@ export default {
       };
       console.log("Item added");
       store.addingToCart.push(addingItem);
+      store.cartNumber += 1;
     },
   },
 };
