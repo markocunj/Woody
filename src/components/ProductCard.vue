@@ -24,7 +24,7 @@
               v-model="kolicina"
             />
             <select class="custom-select ml-1" v-model="duzina">
-              <option selected>Dužina</option>
+              <option selected value="">Dužina</option>
               <option value="25">25</option>
               <option value="33">33</option>
               <option value="45">45</option>
