@@ -1,59 +1,56 @@
 <template>
-  <div class="card" style="background-color: #424949;">
-    <article class="card-body mx-auto" style="max-width: 400px">
-      <h4 class="card-title mt-3 text-center light">Prijava</h4>
-      <p class="text-center">
-        Nemate račun?
-        <router-link to="/registracija">Registrirajte se</router-link>
-      </p>
-      <form>
-        <!-- form-group// -->
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">
-              <i class="fa fa-envelope"></i>
-            </span>
+  <div class="prijava">
+    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 40%" />
+    <div class="container">
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-4">
+          <div class="card sign-in">
+            <article class="card-body">
+              <h4 class="card-title mb-4 mt-1" style="">
+                Prijava
+              </h4>
+              <hr
+                class=""
+                style="color: #daa520; border: 1px solid; width: 35%;"
+              />
+              <p>
+                <a href="" class="btn btn-block btn-outline-light">
+                  <i class="fab fa-google google"></i>
+                  Prijava via Google</a
+                >
+                <a href="" class="btn btn-block btn-outline-primary">
+                  <i class="fab fa-facebook-f"></i> Prijava via Facebook</a
+                >
+              </p>
+              <hr style="border-color: #ccc" />
+              <form>
+                <div class="form-group">
+                  <input
+                    name=""
+                    class="form-control"
+                    placeholder="Email or login"
+                    type="email"
+                  />
+                </div>
+                <!-- form-group// -->
+                <div class="form-group">
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    type="password"
+                  />
+                </div>
+              </form>
+              <button type="submit" class="btn btn1 btn-light btn-block">
+                Login
+              </button>
+            </article>
           </div>
-          <input
-            name=""
-            class="form-control"
-            placeholder="Email adresa"
-            type="email"
-            v-model="email"
-          />
         </div>
-        <div class="form-group input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-          </div>
-          <input
-            class="form-control"
-            placeholder="Lozinka"
-            type="password"
-            v-model="password"
-          />
-        </div>
-        <!-- form-group// -->
-        <button
-          type="button"
-          class="btn btn-primary btn-block"
-          data-toggle="modal"
-          data-target="#exampleModal"
-          @click="prijava()"
-        >
-          Prijava
-        </button>
-        <p class="divider-text" style="padding-bottom: 15px;"></p>
-        <p>
-          <a href="" class="btn btn-block btn-google">
-            <i class="fab fa-google"></i> Login via Google</a
-          >
-          <a href="" class="btn btn-block btn-facebook">
-            <i class="fab fa-facebook-f"></i> Login via facebook</a
-          >
-        </p>
-      </form>
-    </article>
+      </div>
+      <!-- card.// -->
+    </div>
+    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 40%" />
   </div>
 </template>
 
@@ -87,34 +84,36 @@ export default {
 </script>
 
 <style scoped>
-.divider-text {
-  position: relative;
-  text-align: center;
-  margin-top: 15px;
-  margin-bottom: 15px;
+.btn1 {
+  background-color: transparent;
+  color: #daa520;
 }
-.divider-text span {
-  padding: 7px;
-  font-size: 12px;
-  position: relative;
-  z-index: 2;
-}
-.divider-text:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  border-bottom: 1px solid #ddd;
-  top: 55%;
-  left: 0;
-  z-index: 1;
+.btn1:hover {
+  background-color: #ccc;
+  color: black;
 }
 
-.btn-facebook {
-  background-color: #405d9d;
-  color: #fff;
+.container {
+  background-color: transparent;
+  margin: auto;
+  color: white;
+  border: 0;
+  margin-top: 44px;
+  margin-bottom: 44px;
+  padding: 30px;
 }
-.btn-google {
-  background-color: #7c98a8;
-  color: #fff;
+.ikone {
+  opacity: 0.5;
+}
+
+.sign-in {
+  background-color: #212529;
+}
+
+.google {
+  background: -webkit-linear-gradient(#ea4335, #fbbc05, #34a853, #4285f4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 </style>

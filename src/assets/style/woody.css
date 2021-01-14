@@ -9,62 +9,6 @@ html,
   background-color: #424949;
 }
 
-.jumbotrontop {
-  font-size: 21px;
-  height: 100%;
-  line-height: 2.1428571435;
-  color: inherit;
-  width: 100%;
-  background-size: cover;
-  z-index: 1;
-}
-
-.biglogo {
-  width: 40%;
-  display: block;
-  left: initial;
-  opacity: 1;
-  top: 40%;
-  position: relative;
-  display: -webkit-inline-box;
-  float: right;
-}
-.regi {
-  padding-bottom: 30px;
-}
-
-.headline {
-  text-align: middle;
-}
-.row .col-sm-3 label {
-  color: black;
-  float: left;
-}
-.row .col-sm-6 label {
-  float: left;
-  color: black;
-}
-
-.col-sm-12 p {
-  color: black;
-  text-align: left;
-  font-size: 0.9em;
-  padding-top: 15px;
-}
-.col-sm-12 div button {
-  margin-top: 15px;
-  color: black;
-  background-color: grey !important;
-  padding: 15px;
-  display: inline-block;
-  border: none !important;
-  font-size: 1em !important;
-}
-div button:hover {
-  background-color: black;
-  color: white;
-  transition: 0.2;
-}
 /*Transition
 
 .animate-in {
