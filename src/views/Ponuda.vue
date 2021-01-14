@@ -15,7 +15,8 @@ cards = [
     podnaslov: "Drvo za ogrijev bukva",
     opis:
       "Drvo za ogrijev bukva, odlično za brzo podizanje temperature. Dužinu i količinu birate sami.",
-    cijena: "430kn",
+    cijena: 430,
+    id: Math.random(),
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -23,7 +24,8 @@ cards = [
     podnaslov: "Drvo za ogrijev grab",
     opis:
       "Drvo za ogrijev grab, odlično za držanje visoke temperature gorenja na duže vrijeme. Dužinu i količinu birate sami.",
-    cijena: "430kn",
+    cijena: 430,
+    id: Math.random(),
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -31,7 +33,8 @@ cards = [
     podnaslov: "Drvo za ogrijev jasen",
     opis:
       "Najbolje u kombinaciji sa grabom/bukvom za odlične rezultate dugoročnog gorijenja. Dužinu i količinu birate sami.",
-    cijena: "380kn",
+    cijena: 380,
+    id: Math.random(),
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -39,7 +42,8 @@ cards = [
     podnaslov: "Drvo za ogrijev hrast",
     opis:
       "Najbolje drvo, uz bukvu i grab, za hladne zimske dane (pogotovo ako je suho). Dužinu i količinu birate sami.",
-    cijena: "400kn",
+    cijena: 400,
+    id: Math.random(),
   },
 ];
 

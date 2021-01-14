@@ -21,27 +21,61 @@
               name=""
               class="custom-select ml-1"
               placeholder="Količina (u metrima)"
+              v-model="kolicina"
             />
-            <select class="custom-select ml-1">
-              <option selected>Dužina</option>
-              <option value="1">25</option>
-              <option value="2">33</option>
-              <option value="3">45</option>
+            <select class="custom-select ml-1" v-model="duzina">
+              <option selected value="">Dužina</option>
+              <option value="25">25</option>
+              <option value="33">33</option>
+              <option value="45">45</option>
             </select>
           </div>
           <div class="buy d-flex justify-content-center align-items-center">
-            <a
+            <button
               href="#"
               class="btn btn-secondary mt-4  btn-sm mr-1 mb-2"
-              style=""
-              ><i class="fas fa-shopping-cart"></i> Dodavanje u košaricu</a
+              @click="addingToCart()"
             >
+              <i class="fas fa-shopping-cart"></i> Dodavanje u košaricu
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import background from "@/assets/background.jpg";
+import store from "@/store";
+
+export default {
+  name: "ProductCard",
+  data() {
+    return {
+      kolicina: "",
+      duzina: "",
+    };
+  },
+  props: ["info"],
+
+  methods: {
+    addingToCart() {
+      let addingItem = {};
+      addingItem = {
+        kolicina: this.kolicina,
+        duzina: this.duzina,
+        cijena: this.info.cijena,
+        naslov: this.info.naslov,
+        podnaslov: this.info.podnaslov,
+      };
+      console.log("Item added");
+      store.addingToCart.push(addingItem);
+      store.cartNumber += 1;
+    },
+  },
+};
+</script>
 
 <style scoped>
 .container {
@@ -106,10 +140,3 @@
   }
 }
 </style>
-<script>
-import background from "@/assets/background.jpg";
-export default {
-  props: ["info"],
-  name: "ProductCard",
-};
-</script>

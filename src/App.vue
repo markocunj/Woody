@@ -26,6 +26,14 @@
           </li>
         </ul>
         <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+          <li class="nav-item" v-if="store.cartNumber != 0">
+            <router-link to="/kosarica" class="nav-link"
+              ><i class="fas fa-shopping-cart" style="font-size:24px"></i>
+              <span class="badge badge-warning" id="lblCartCount">
+                {{ store.cartNumber }}
+              </span></router-link
+            >
+          </li>
           <li class="nav-item gumb">
             <a
               v-if="
@@ -71,7 +79,6 @@ firebase.auth().onAuthStateChanged((user) => {
     store.currentUser = user.email;
 
     if (!currentRoute.meta.needsUser) {
-      router.push({ name: "Home" });
     }
   } else {
     console.log("No user");
@@ -135,7 +142,7 @@ nav a:hover {
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
-//-- Fade izmedu stranica
+
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.3s;
