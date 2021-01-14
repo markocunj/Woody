@@ -150,9 +150,11 @@
               />
             </li>
             <li>
-              <a class="signup__link" style="color: white;">Imate račun?</a>
+              <a class="signup__link" style="color: white;">Imate račun? </a>
               <a class="signup__link"
-                ><router-link to="/prijava"> Ulogirajte se!</router-link></a
+                ><router-link to="/prijava" style="color: #daa520"
+                  >Ulogirajte se!</router-link
+                ></a
               >
             </li>
           </ul>

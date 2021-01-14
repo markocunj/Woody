@@ -11,6 +11,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "firebase": "^8.2.1",
+    "tailwindcss": "^2.0.2",
     "vue": "^2.6.11",
     "vue-float-label": "^1.6.1",
     "vue-router": "^3.2.0",

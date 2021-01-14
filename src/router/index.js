@@ -7,6 +7,7 @@ import Registracija from "../views/Registracija.vue";
 import Kontakt from "../views/Kontakt.vue";
 import Profil from "../views/Profil.vue";
 import store from "@/store";
+import ShoppingCart from "../views/ShoppingCart.vue";
 
 Vue.use(VueRouter);
 
@@ -49,6 +50,11 @@ const routes = [
     path: "/profil",
     name: "Profil",
     component: Profil,
+  },
+  {
+    path: "/kosarica",
+    name: "Kosarica",
+    component: ShoppingCart,
   },
 ];
 
