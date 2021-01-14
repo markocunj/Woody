@@ -81,9 +81,4 @@ export default {
 .from-group {
   text-align: center;
 }
-.container {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  padding: 40px;
-}
 </style>

@@ -34,7 +34,7 @@
               </span></router-link
             >
           </li>
-          <li class="nav-item gumb">
+          <li class="nav-item">
             <a
               v-if="
                 !store.currentUser &&
@@ -43,7 +43,7 @@
               "
             >
               <router-link to="/prijava">
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light gumbic">
                   Prijava
                 </button>
               </router-link>
@@ -51,7 +51,7 @@
 
             <a v-if="store.currentUser">
               <router-link to="/profil">
-                <button type="button" class="btn btn-light">
+                <button type="button" class="btn btn-light gumbic">
                   <i class="fa fa-user" aria-hidden="true"></i>
                   Profil
                 </button>
@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";
 .nav-link {
@@ -126,21 +126,16 @@ export default {
 nav a:hover {
   color: #ccc;
 }
-.btn-light:hover {
-  background-color: #ccc;
-  color: #daa520;
-}
-
 .btn-light {
-  background-color: transparent;
-  color: #daa520;
+  background-color: transparent !important;
+  color: #daa520 !important;
 }
 .btn-light:hover {
-  background-color: #ccc;
-  color: black;
+  background-color: #ccc !important;
+  color: black !important;
 }
 .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
 .fade-enter-active,

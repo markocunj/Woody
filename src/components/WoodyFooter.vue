@@ -1,5 +1,5 @@
 <template>
-  <footer style="margin-bottom: 0;" class="site-footer">
+  <footer class="site-footer">
     <div class="container">
       <div class="row">
         <div class="col-sm-12 col-md-6">
@@ -8,9 +8,9 @@
             Woody je tvrtka koja se bavi proizvodnjom i prodajom drva za
             ogrijev, specifično bukve, hrasta, graba i jasena. Woody je nastao
             2020. i kao stranica putem koje ste u mogućnosti naručiti drva za
-            vaše kućanstvo. Obratite se našem Helpdesk timu koji vam uvijek
-            stoje na raspolaganju putem e-maila:
-            <strong> info@woody.hr</strong>. Ugodno grijanje!
+            vaše kućanstvo. <br />Obratite se našem Helpdesk timu koji vam
+            uvijek stoje na raspolaganju putem e-maila:
+            <strong> woody.webshop@gmail.com</strong>. Ugodno grijanje!
           </p>
         </div>
 
@@ -52,20 +52,26 @@
         <div class="col-md-8 col-sm-6 col-xs-12">
           <p class="copyright-text pull-left">
             Copyright &copy; 2020 Sva prava zadržana
-            <a href="#">Woody</a>.
+            <a href="#" style="color: #daa520">Woody</a>
           </p>
         </div>
 
         <div class="col-md-4 col-sm-6 col-xs-12">
           <ul class="social-icons">
             <li>
-              <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+              <a
+                class="facebook"
+                href="https://www.facebook.com/profile.php?id=100062178366842"
+                ><i class="fa fa-facebook"></i
+              ></a>
             </li>
             <li>
-              <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+              <a class="twitter" href="https://twitter.com/Woody48648855"
+                ><i class="fa fa-twitter"></i
+              ></a>
             </li>
             <li>
-              <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+              <a class="" href="#"><i class="fab fa-google google"></i></a>
             </li>
           </ul>
         </div>
@@ -206,16 +212,13 @@ export default {
 }
 .social-icons a.facebook:hover {
   background-color: #3b5998;
+  color: white;
 }
 .social-icons a.twitter:hover {
   background-color: #00aced;
+  color: white;
 }
-.social-icons a.linkedin:hover {
-  background-color: #007bb6;
-}
-.social-icons a.dribbble:hover {
-  background-color: #ea4c89;
-}
+
 @media (max-width: 767px) {
   .social-icons li.title {
     display: block;

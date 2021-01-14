@@ -30,6 +30,7 @@
                     class="form-control"
                     placeholder="Email or login"
                     type="email"
+                    v-model="email"
                   />
                 </div>
                 <!-- form-group// -->
@@ -38,11 +39,16 @@
                     class="form-control"
                     placeholder="******"
                     type="password"
+                    v-model="password"
                   />
                 </div>
               </form>
-              <button type="submit" class="btn btn1 btn-light btn-block">
-                Login
+              <button
+                type="submit"
+                class="btn btn1 btn-light btn-block"
+                @click="prijava()"
+              >
+                Prijava
               </button>
             </article>
           </div>
@@ -73,6 +79,7 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((result) => {
           console.log("Uspjesna prijava");
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);
@@ -91,16 +98,6 @@ export default {
 .btn1:hover {
   background-color: #ccc;
   color: black;
-}
-
-.container {
-  background-color: transparent;
-  margin: auto;
-  color: white;
-  border: 0;
-  margin-top: 44px;
-  margin-bottom: 44px;
-  padding: 30px;
 }
 .ikone {
   opacity: 0.5;

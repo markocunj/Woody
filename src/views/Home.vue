@@ -17,10 +17,12 @@
         nalazi niže.
       </p>
     </b-jumbotron>
-    <div class="container" style="width: 50%;">
+    <div class="container" style="width: 35%;">
       <div class="form-row">
         <div class="form-group col-md-3 ikone">
-          <h3><i class="fas fa-tree"></i></h3>
+          <h3>
+            <i class="fas fa-tree"></i>
+          </h3>
           <h4>Najbolja <br />drva</h4>
         </div>
         <div class="form-group col-md-3 ikone">
@@ -37,13 +39,13 @@
         </div>
       </div>
     </div>
-    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 40%" />
+    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 50%" />
     <div class="container">
       <div class="form-row justify-content-center">
         <div class="form-group col-md-4">
           <div class="card sign-in">
             <article class="card-body">
-              <h4 class="card-title mb-4 mt-1" style="">
+              <h4 class="card-title mb-4 mt-1" style="color: #daa520">
                 Ponuda
               </h4>
               <p>
@@ -62,7 +64,7 @@
                 Trenutno traju zimski popusti u kojima cijena ide čak do -20%!
               </p>
               <router-link to="/ponuda">
-                <button type="button" class="btn btn1 btn-light btn-block">
+                <button type="button" class="btn btn-block btn-light">
                   Ponuda
                 </button></router-link
               >
@@ -74,19 +76,28 @@
         <div v-if="!store.currentUser" class="form-group col-md-4">
           <div class="card sign-in">
             <article class="card-body">
-              <h4 class="card-title mb-4 mt-1" style="">
+              <h4 class="card-title mb-4 mt-1" style="color: #daa520">
                 Prijava
               </h4>
-              <hr
-                class=""
-                style="color: #daa520; border: 1px solid; width: 35%;"
-              />
+              <router-link to="/registracija"
+                ><div class="separator">
+                  Nemate račun? Klik ovdje
+                </div></router-link
+              >
               <p>
-                <a href="" class="btn btn-block btn-outline-light">
-                  <i class="fab fa-google google"></i>
+                <a
+                  href=""
+                  class="btn btn-block"
+                  style="background-color: #DD4B39; color: white;"
+                >
+                  <i class="fab fa-google google" style="color: white;"></i>
                   Prijava via Google</a
                 >
-                <a href="" class="btn btn-block btn-outline-primary">
+                <a
+                  href=""
+                  class="btn btn-block"
+                  style="background-color: #3b5998; color: white"
+                >
                   <i class="fab fa-facebook-f"></i> Prijava via Facebook</a
                 >
               </p>
@@ -113,7 +124,7 @@
               </form>
               <button
                 type="button"
-                class="btn btn1 btn-light btn-block"
+                class="btn btn-light btn-block"
                 @click="prijava()"
               >
                 Prijava
@@ -124,7 +135,41 @@
         </div>
       </div>
     </div>
-    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 35%" />
+    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 50%" />
+    <div class="container" style="width: 35%;">
+      <div class="form-row justify-content-center">
+        <div class="form-group col-md-10">
+          <h3>
+            <i class="far fa-question-circle" style="color: #daa520"> </i>
+          </h3>
+          <h4>
+            Za sve informacije javite nam se putem društvenih mreža ili e-maila:
+          </h4>
+          <ul class="social-icons">
+            <li>
+              <a
+                class="facebook"
+                style="color: #6b9aff"
+                href="https://www.facebook.com/profile.php?id=100062178366842"
+                ><i class="fa fa-facebook"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                class="twitter"
+                style="color: #3b5998 "
+                href="https://twitter.com/Woody48648855"
+                ><i class="fa fa-twitter"></i
+              ></a>
+            </li>
+            <li>
+              <a class="" href="#"><i class="fab fa-google google"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 30%" />
   </div>
 </template>
 
@@ -157,14 +202,6 @@ export default {
 </script>
 
 <style scoped>
-.btn1 {
-  background-color: transparent;
-  color: #daa520;
-}
-.btn1:hover {
-  background-color: #ccc;
-  color: black;
-}
 .jumbotron {
   background-image: url("../assets/suma.jpg");
   background-size: cover;
@@ -188,5 +225,28 @@ export default {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ccc;
+}
+.separator:hover {
+  color: #daa520;
+}
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #daa520;
+}
+.separator::before {
+  margin-right: 0.25em;
+}
+.separator::after {
+  margin-left: 0.25em;
 }
 </style>
