@@ -50,7 +50,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-sm-6 col-xs-12">
-          <p class="copyright-text">
+          <p class="copyright-text pull-left">
             Copyright &copy; 2020 Sva prava zadržana
             <a href="#">Woody</a>.
           </p>

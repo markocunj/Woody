@@ -9,12 +9,3 @@ html,
   background-color: #424949;
 }
 
-.jumbotrontop {
-  font-size: 21px;
-  height: 100%;
-  line-height: 2.1428571435;
-  color: inherit;
-  width: 100%;
-  background-size: cover;
-  z-index: 1;
-}

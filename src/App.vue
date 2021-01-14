@@ -113,7 +113,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped>
 @import "./assets/style/woody.css";
 @import "./assets/style/media.css";
 .nav-link {
