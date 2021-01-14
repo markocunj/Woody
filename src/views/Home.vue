@@ -85,14 +85,14 @@
                 </div></router-link
               >
               <p>
-                <a
-                  href=""
+                <button
                   class="btn btn-block"
                   style="background-color: #DD4B39; color: white;"
+                  @click="googleLogin()"
                 >
                   <i class="fab fa-google google" style="color: white;"></i>
-                  Prijava via Google</a
-                >
+                  Prijava via Google
+                </button>
                 <a
                   href=""
                   class="btn btn-block"
@@ -117,7 +117,7 @@
                   <input
                     class="form-control"
                     placeholder="Lozinka"
-                    type="password"
+                    type="current-password"
                     v-model="password"
                   />
                 </div>
@@ -196,6 +196,37 @@ export default {
           console.error("Došlo je do greške", error);
         });
       console.log("Nastavak");
+    },
+    googleLogin() {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          store.currentUserLoggedInWithGoogleOrFacebook = true;
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential;
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          console.log(user);
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          console.log(errorCode);
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          console.log(errorMessage);
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          console.log(email);
+          var credential = error.credential;
+          console.log(credential);
+          // ...
+        });
     },
   },
 };

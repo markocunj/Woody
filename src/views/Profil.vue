@@ -36,7 +36,10 @@
                   >Povijest narudžbi</a
                 >
               </li>
-              <li class="nav-item">
+              <li
+                class="nav-item"
+                v-if="!store.currentUserLoggedInWithGoogleOrFacebook"
+              >
                 <a
                   class="nav-link"
                   id="promjenaLozinke-tab"
@@ -204,6 +207,9 @@ export default {
       newPassword: "",
       confirmPassword: "",
     };
+  },
+  mounted() {
+    console.log(store.currentUserLoggedInWithGoogleOrFacebook);
   },
   methods: {
     odjava() {
