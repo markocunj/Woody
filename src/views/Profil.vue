@@ -159,6 +159,13 @@
                         style="border: 1px solid gray;"
                       />
                     </div>
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      @click="promjenaLozinke()"
+                    >
+                      Promjena lozinke
+                    </button>
                   </div>
                   <div
                     class="col-md-6"
@@ -177,13 +184,6 @@
                     </ul>
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  @click="promjenaLozinke()"
-                >
-                  Save Change
-                </button>
               </div>
             </div>
           </div>
@@ -251,6 +251,11 @@ img {
 }
 .text-muted {
   font-weight: 300;
+}
+
+.btn-primary {
+  background-color: #daa520;
+  border: 0px;
 }
 .btn:hover {
   background-color: #4d5154;
