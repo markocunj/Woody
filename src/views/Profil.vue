@@ -242,12 +242,6 @@ body {
   color: #8e9194;
   background-color: #f4f6f9;
 }
-.avatar-xl img {
-  width: 110px;
-}
-.rounded-circle {
-  border-radius: 50% !important;
-}
 img {
   vertical-align: middle;
   border-style: none;
