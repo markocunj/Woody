@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="red">
     <product-card v-for="(card, idx) in cards" :key="idx" :info="card" />
   </div>
 </template>
@@ -59,3 +59,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+  .red {
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>
