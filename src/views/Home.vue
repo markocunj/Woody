@@ -105,30 +105,35 @@
               <form>
                 <div class="form-group">
                   <input
-                    name=""
-                    class="form-control"
-                    placeholder="Email or login"
-                    type="email"
+                    placeholder="E-mail"
                     v-model="email"
+                    v-bind:class="{
+                      'form-control': true,
+                      'is-invalid': !validEmail(email) && blured,
+                    }"
+                    v-on:blur="blured = true"
                   />
+                  <div class="invalid-feedback">
+                    <i class="fas fa-info-circle"></i> Morate unijeti ispravan
+                    mail
+                  </div>
                 </div>
-                <!-- form-group// -->
                 <div class="form-group">
                   <input
-                    class="form-control"
                     placeholder="Lozinka"
-                    type="current-password"
+                    class="form-control"
+                    type="password"
                     v-model="password"
                   />
                 </div>
+                <button
+                  type="submit"
+                  class="btn btn1 btn-light btn-block"
+                  v-on:click.stop.prevent="submit"
+                >
+                  Prijava
+                </button>
               </form>
-              <button
-                type="button"
-                class="btn btn-light btn-block"
-                @click="prijava()"
-              >
-                Prijava
-              </button>
             </article>
           </div>
           <!-- card.// -->
@@ -182,6 +187,8 @@ export default {
       store,
       email: "",
       password: "",
+      blured: false,
+      valid: false,
     };
   },
   methods: {
@@ -227,6 +234,25 @@ export default {
           console.log(credential);
           // ...
         });
+    },
+
+    validate: function() {
+      this.blured = true;
+      if (this.validEmail(this.email)) {
+        this.valid = true;
+      }
+    },
+
+    validEmail: function(email) {
+      var re = /(.+)@(.+){2,}\.(.+){2,}/;
+      return re.test(email.toLowerCase());
+    },
+
+    submit: function() {
+      this.validate();
+      if (this.valid) {
+        this.prijava();
+      }
     },
   },
 };

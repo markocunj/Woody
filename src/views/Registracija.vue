@@ -15,7 +15,6 @@
             name="username"
             id="username"
             placeholder="Ime"
-            autocomplete="off"
           />
         </div>
         <div class="form-group">
@@ -27,7 +26,6 @@
             id="email"
             placeholder="E-mail adresa"
             v-model="email"
-            autocomplete="off"
           />
         </div>
         <div class="form-row">
@@ -40,7 +38,6 @@
               id="password"
               v-model="password"
               placeholder="Zaporka"
-              autocomplete="off"
               required
             />
           </div>
@@ -53,101 +50,14 @@
               id="passwordRepeat"
               v-model="repeatPassword"
               placeholder="Ponovi zaporku"
-              autocomplete="off"
               required
             />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-5">
-            <label for="address">Adresa</label>
-            <input
-              class="form-control"
-              type="address"
-              name="adresa"
-              id="adresa"
-              placeholder="Adresa"
-              required
-            />
-          </div>
-          <div class="form-group col-md-5">
-            <label for="address">Grad</label>
-            <input
-              class="form-control"
-              type="city"
-              name="city"
-              id="city"
-              placeholder="Grad"
-              required
-            />
-          </div>
-          <div class="form-group col-md-2">
-            <label for="address">Kućni br</label>
-            <input
-              class="form-control"
-              type="kucniBr"
-              name="kucniBr"
-              id="kucniBr"
-              placeholder="Kućni"
-              required
-            />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="address">Županija</label>
-            <select
-              class="form-control"
-              type="županija"
-              name="županija"
-              id="županija"
-              required
-            >
-              <option>Izaberi županiju..</option>
-              <option>Krapinsko-zagorska županija</option>
-              <option>Sisačko-moslavačka županija</option>
-              <option>Karlovačka županija</option>
-              <option>Varaždinska županija</option>
-              <option>Koprivničko-križevačka županija</option>
-              <option>Bjelovarsko-bilogorska županija</option>
-              <option>Primorsko-goranska županija</option>
-              <option>Ličko-senjska županija</option>
-              <option>Virovitičko-podravska županija</option>
-              <option>Požeško-slavonska županija</option>
-              <option>Brodsko-posavska županija</option>
-              <option>Zadarska županija</option>
-              <option>Osječko-baranjska županija</option>
-              <option>Šibensko-kninska županija</option>
-              <option>Vukovarsko-srijemska županija</option>
-              <option>Splitsko-dalmatinska županija</option>
-              <option>Istarska županija</option>
-              <option>Dubrovačko-neretvanska županija</option>
-              <option>Međimurska županija</option>
-              <option>Grad Zagreb</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="address">Država</label>
-            <select
-              class="form-control"
-              type="country"
-              name="country"
-              id="country"
-              required
-            >
-              <option>Hrvatska</option>
-            </select>
           </div>
         </div>
         <div class="m-t-lg">
           <ul class="list-inline">
             <li>
-              <input
-                class="btn btn--form"
-                type="button"
-                value="Registracija"
-                @click="registracija()"
-              />
+              <input class="btn btn--form" type="button" value="Registracija" />
             </li>
             <li>
               <a class="signup__link" style="color: white;">Imate račun? </a>
@@ -163,6 +73,42 @@
     </div>
   </div>
 </template>
+
+<script>
+import { firebase } from "@/firebase.js";
+export default {
+  name: "Registracija",
+  data() {
+    return {
+      email: "",
+      password: "",
+      repeatPassword: "",
+    };
+  },
+  methods: {
+    registracija() {
+      if (this.password == this.repeatPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.email, this.password)
+          .then((user) => {
+            console.log("Uspješna registracija");
+            alert("Uspješna registracija");
+            this.$router.push({ name: "Home" });
+          })
+          .catch(function(error) {
+            console.error("Došlo je do greške", error);
+            alert(error.message);
+          });
+        console.log("Nastavak");
+      } else {
+        alert("Password nije jednak repeat passwordu.");
+      }
+    },
+  },
+};
+</script>
+
 <style scoped>
 body {
   font: 100% / 1.414 "Open Sans", "Roboto", arial, sans-serif;
@@ -250,37 +196,3 @@ label {
   color: #999;
 }
 </style>
-
-<script>
-import { firebase } from "@/firebase.js";
-export default {
-  name: "Registracija",
-  data() {
-    return {
-      email: "",
-      password: "",
-      repeatPassword: "",
-    };
-  },
-  methods: {
-    registracija() {
-      if (this.password == this.repeatPassword) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then((user) => {
-            console.log("Uspješna registracija");
-            alert("Uspješna registracija");
-          })
-          .catch(function(error) {
-            console.error("Došlo je do greške", error);
-            alert(error.message);
-          });
-        console.log("Nastavak");
-      } else {
-        alert("Password nije jednak repeat passwordu.");
-      }
-    },
-  },
-};
-</script>

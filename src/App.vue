@@ -76,7 +76,8 @@ firebase.auth().onAuthStateChanged((user) => {
   const currentRoute = router.currentRoute;
   if (user) {
     console.log(user.email);
-    store.currentUser = user.email;
+    store.currentUser = user;
+    console.log(user.displayName);
 
     if (!currentRoute.meta.needsUser) {
     }

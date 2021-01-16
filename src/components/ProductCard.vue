@@ -8,33 +8,40 @@
             class="mb-2"
             style="color: black; font-weight: bold;  padding: 10px"
           >
-            <i class="fas fa-tag" style="color: red;"></i> {{ info.cijena }}
+            <i class="fas fa-tag" style="color: red;"></i> {{ info.cijena }}kn
             <a style="color: #424949; font-weight: normal;">/metar</a>
           </h5>
           <h6 class="mb-2 ">{{ info.podnaslov }}</h6>
-
+          <hr style="color: #616D6D; border: 1px solid; width: 50%" />
           <p class="card-text">
             {{ info.opis }}
           </p>
           <div class="options d-flex flex-fill">
-            <input
+            <b-form-input
               name=""
-              class="custom-select ml-1"
+              class="ml-1"
+              type="number"
               placeholder="Količina (u metrima)"
+              :state="provjeraKolicine"
               v-model="kolicina"
-            />
-            <select class="custom-select ml-1" v-model="duzina">
+            ></b-form-input>
+            <b-form-select
+              class="custom-select ml-1"
+              v-model="duzina"
+              :state="provjeraDuzine"
+            >
               <option selected value="">Dužina</option>
               <option value="25">25</option>
               <option value="33">33</option>
               <option value="45">45</option>
-            </select>
+            </b-form-select>
           </div>
           <div class="buy d-flex justify-content-center align-items-center">
             <button
+              type="submit"
               href="#"
-              class="btn btn-secondary mt-4  btn-sm mr-1 mb-2"
-              @click="addingToCart()"
+              class="btn btn-secondary mt-4 btn-sm mr-1 mb-2"
+              @click="checkingBeforeAdding()"
             >
               <i class="fas fa-shopping-cart"></i> Dodavanje u košaricu
             </button>
@@ -61,17 +68,32 @@ export default {
 
   methods: {
     addingToCart() {
-      let addingItem = {};
-      addingItem = {
-        kolicina: this.kolicina,
-        duzina: this.duzina,
-        cijena: this.info.cijena,
-        naslov: this.info.naslov,
-        podnaslov: this.info.podnaslov,
-      };
-      console.log("Item added");
-      store.addingToCart.push(addingItem);
-      store.cartNumber += 1;
+      if (this.kolicina != "" && this.duzina != "") {
+        let addingItem = {};
+        addingItem = {
+          kolicina: this.kolicina,
+          duzina: this.duzina,
+          cijena: this.info.cijena,
+          naslov: this.info.naslov,
+          podnaslov: this.info.podnaslov,
+        };
+        console.log("Item added");
+        store.addingToCart.push(addingItem);
+        store.cartNumber += 1;
+      }
+    },
+    checkingBeforeAdding() {
+      if (this.kolicina != "" && this.duzina != "") {
+        this.addingToCart();
+      }
+    },
+  },
+  computed: {
+    provjeraDuzine() {
+      return this.duzina != "";
+    },
+    provjeraKolicine() {
+      return this.kolicina != "";
     },
   },
 };
@@ -84,10 +106,10 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  height: 600px;
+  height: 650px;
 }
 .container:hover {
-  box-shadow: 0 8px 12px 0 #daa520;
+  box-shadow: 0 8px 12px 6px #252323;
 }
 .col-md-3 {
   margin-top: 1vw;

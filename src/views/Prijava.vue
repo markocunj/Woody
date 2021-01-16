@@ -9,19 +9,25 @@
               <h4 class="card-title mb-4 mt-1" style="color: white !important">
                 Prijava
               </h4>
-              <hr
-                class=""
-                style="color: #daa520; border: 1px solid; width: 35%;"
-              />
+              <router-link to="/registracija"
+                ><div class="separator">
+                  Nemate račun? Klik ovdje
+                </div></router-link
+              >
               <p>
                 <button
-                  class="btn btn-block btn-outline-light"
+                  class="btn btn-block"
+                  style="background-color: #DD4B39; color: white;"
                   @click="googleLogin()"
                 >
-                  <i class="fab fa-google google"></i>
+                  <i class="fab fa-google google" style="color: white;"></i>
                   Prijava via Google
                 </button>
-                <a href="" class="btn btn-block btn-outline-primary">
+                <a
+                  href=""
+                  class="btn btn-block"
+                  style="background-color: #3b5998; color: white"
+                >
                   <i class="fab fa-facebook-f"></i> Prijava via Facebook</a
                 >
               </p>
@@ -29,30 +35,35 @@
               <form>
                 <div class="form-group">
                   <input
-                    name=""
-                    class="form-control"
-                    placeholder="Email or login"
-                    type="email"
+                    placeholder="E-mail"
                     v-model="email"
+                    v-bind:class="{
+                      'form-control': true,
+                      'is-invalid': !validEmail(email) && blured,
+                    }"
+                    v-on:blur="blured = true"
                   />
+                  <div class="invalid-feedback">
+                    <i class="fas fa-info-circle"></i> Morate unijeti ispravan
+                    mail
+                  </div>
                 </div>
-                <!-- form-group// -->
                 <div class="form-group">
                   <input
+                    placeholder="Lozinka"
                     class="form-control"
-                    placeholder="******"
-                    type="current-password"
-                    v-model="currentPassword"
+                    type="password"
+                    v-model="password"
                   />
                 </div>
+                <button
+                  type="submit"
+                  class="btn btn1 btn-light btn-block"
+                  v-on:click.stop.prevent="submit"
+                >
+                  Prijava
+                </button>
               </form>
-              <button
-                type="submit"
-                class="btn btn1 btn-light btn-block"
-                @click="prijava()"
-              >
-                Prijava
-              </button>
             </article>
           </div>
         </div>
@@ -73,8 +84,10 @@ export default {
   data() {
     return {
       email: "",
-      currentPassword: "",
+      password: "",
       store,
+      blured: false,
+      valid: false,
     };
   },
   methods: {
@@ -83,7 +96,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((result) => {
-          console.log("Uspjesna prijava");
           this.$router.push({ name: "Home" });
         })
         .catch((error) => {
@@ -101,27 +113,39 @@ export default {
           /** @type {firebase.auth.OAuthCredential} */
           var credential = result.credential;
           this.$router.push({ name: "Home" });
-          // This gives you a Google Access Token. You can use it to access the Google API.
           var token = credential.accessToken;
-          // The signed-in user info.
           var user = result.user;
-          console.log(user);
-          // ...
         })
         .catch((error) => {
           // Handle Errors here.
           var errorCode = error.code;
           console.log(errorCode);
           var errorMessage = error.message;
-          // The email of the user's account used.
           console.log(errorMessage);
           var email = error.email;
-          // The firebase.auth.AuthCredential type that was used.
           console.log(email);
           var credential = error.credential;
           console.log(credential);
-          // ...
         });
+    },
+
+    validate: function() {
+      this.blured = true;
+      if (this.validEmail(this.email)) {
+        this.valid = true;
+      }
+    },
+
+    validEmail: function(email) {
+      var re = /(.+)@(.+){2,}\.(.+){2,}/;
+      return re.test(email.toLowerCase());
+    },
+
+    submit: function() {
+      this.validate();
+      if (this.valid) {
+        this.prijava();
+      }
     },
   },
 };
@@ -149,5 +173,27 @@ export default {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #ccc;
+}
+.separator:hover {
+  color: #daa520;
+}
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #daa520;
+}
+.separator::before {
+  margin-right: 0.25em;
+}
+.separator::after {
+  margin-left: 0.25em;
 }
 </style>

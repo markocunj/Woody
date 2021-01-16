@@ -3,4 +3,5 @@ export default {
   addingToCart: [],
   cartNumber: 0,
   currentUserLoggedInWithGoogleOrFacebook: false,
+  currentSignedInUser: [],
 };

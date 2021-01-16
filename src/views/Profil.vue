@@ -64,39 +64,27 @@
                     <label style="border-bottom: 1px solid #daa520"
                       >Ime i prezime</label
                     >
-                    <div class="form-control">Marko Cunj</div>
+                    <div class="form-control">
+                      {{ store.currentUser.displayName }}
+                    </div>
                   </div>
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
                       >Email</label
                     >
-                    <div class="form-control">marko.cunj@gmail.com</div>
+                    <div class="form-control">
+                      {{ store.currentUser.email }}
+                    </div>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
-                      >Adresa</label
+                      >Broj telefona</label
                     >
-                    <div class="form-control">Ščapovec 1</div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520"
-                      >Županija</label
-                    >
-                    <div class="form-control">Istarska</div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520"
-                      >Država</label
-                    >
-                    <div class="form-control">Hrvatska</div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520">Zip</label>
-                    <div class="form-control">52211</div>
+                    <div class="form-control">
+                      {{ store.currentUser.phoneNumber }}
+                    </div>
                   </div>
                 </div>
                 <div class="form-row">
@@ -124,7 +112,9 @@
                     <label style="border-bottom: 1px solid #daa520"
                       >Email</label
                     >
-                    <div class="form-control">marko.cunj@gmail.com</div>
+                    <div class="form-control">
+                      {{ store.currentUser.email }}
+                    </div>
                   </div>
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
@@ -140,53 +130,58 @@
                 role="tabpanel"
                 aria-labelledby="promjenaLozinke-tab"
               >
-                <div class="row mb-4">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="inputPassword5">New Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="inputPassword5"
-                        v-model="newPassword"
-                        style="border: 1px solid gray;"
-                      />
+                <form>
+                  <div class="row mb-4">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputPassword5">Nova lozinka</label>
+                        <input
+                          type="new-password"
+                          class="form-control"
+                          id="inputPassword5"
+                          placeholder="Nova lozinka"
+                          v-model="newPassword"
+                          style="border: 1px solid gray;"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="inputPassword6">Potvrdite lozinku</label>
+                        <input
+                          type="repeat-password"
+                          class="form-control"
+                          placeholder="Potvrdite lozinku"
+                          id="inputPassword6"
+                          v-model="confirmPassword"
+                          style="border: 1px solid gray;"
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        style="margin-bottom: 10px;"
+                        @click="promjenaLozinke()"
+                      >
+                        Promjena lozinke
+                      </button>
                     </div>
-                    <div class="form-group">
-                      <label for="inputPassword6">Confirm Password</label>
-                      <input
-                        type="password"
-                        class="form-control"
-                        id="inputPassword6"
-                        v-model="confirmPassword"
-                        style="border: 1px solid gray;"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      class="btn btn-primary"
-                      @click="promjenaLozinke()"
+                    <div
+                      class="col-md-6"
+                      style="border: 1px solid gray; padding: 10px; border-radius: 10px"
                     >
-                      Promjena lozinke
-                    </button>
+                      <p class="mb-2">Zahtjevi lozinke</p>
+                      <p class="small text-muted mb-2">
+                        Da bi postavili novu lozinku, morate pratiti sljedeće
+                        zahtjeve:
+                      </p>
+                      <ul class="small text-muted pl-4 mb-0">
+                        <li>Najmanje 8 slova</li>
+                        <li>Najmanje jedan broj</li>
+                        <li>Ne može biti jednaka kao prošla lozinka</li>
+                      </ul>
+                    </div>
                   </div>
-                  <div
-                    class="col-md-6"
-                    style="border: 1px solid gray; padding: 10px; border-radius: 10px"
-                  >
-                    <p class="mb-2">Password requirements</p>
-                    <p class="small text-muted mb-2">
-                      To create a new password, you have to meet all of the
-                      following requirements:
-                    </p>
-                    <ul class="small text-muted pl-4 mb-0">
-                      <li>Minimum 8 character</li>
-                      <li>At least one special character</li>
-                      <li>At least one number</li>
-                      <li>Can’t be the same as a previous password</li>
-                    </ul>
-                  </div>
-                </div>
+                </form>
               </div>
             </div>
           </div>
