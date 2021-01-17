@@ -32,7 +32,7 @@
                 >
               </p>
               <hr style="border-color: #ccc" />
-              <form>
+              <form @submit.stop.prevent="submit">
                 <div class="form-group">
                   <input
                     placeholder="E-mail"
@@ -54,13 +54,18 @@
                     class="form-control"
                     type="password"
                     v-model="password"
+                    autocomplete="on"
                   />
                 </div>
-                <button
-                  type="submit"
-                  class="btn btn1 btn-light btn-block"
-                  v-on:click.stop.prevent="submit"
+                <div
+                  class="text-danger"
+                  v-if="wrongPasswordOrEmail"
+                  style="margin-bottom: 10px;"
                 >
+                  <i class="fas fa-info-circle"></i> Neispravan e-mail ili
+                  šifra.
+                </div>
+                <button type="submit" class="btn btn1 btn-light btn-block">
                   Prijava
                 </button>
               </form>
@@ -88,6 +93,7 @@ export default {
       store,
       blured: false,
       valid: false,
+      wrongPasswordOrEmail: false,
     };
   },
   methods: {
@@ -97,9 +103,15 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((result) => {
           this.$router.push({ name: "Home" });
+          this.wrongEmailOrPassword = false;
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);
+          const wrongError =
+            "The password is invalid or the user does not have a password.";
+          if (wrongError == error.message) {
+            this.wrongPasswordOrEmail = true;
+          }
         });
       console.log("Nastavak");
     },

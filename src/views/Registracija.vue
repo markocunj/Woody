@@ -2,20 +2,34 @@
   <div class="signup__container">
     <div class="container__child signup__form">
       <h2 class="card-title mt-6 text-center">
-        <a style="  border-bottom: 1px solid #daa520; padding-bottom: 5px;"
+        <a style=" border-bottom: 1px solid #daa520; padding-bottom: 5px;"
           >Registracija</a
         >
       </h2>
-      <form action="#">
-        <div class="form-group">
-          <label for="username">Ime i Prezime</label>
-          <input
-            class="form-control"
-            type="text"
-            name="username"
-            id="username"
-            placeholder="Ime"
-          />
+      <form @submit.stop.prevent="submit">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">Ime</label>
+            <input
+              class="form-control"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Ime"
+              required="true"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lastname">Prezime</label>
+            <input
+              class="form-control"
+              type="text"
+              name="lastname"
+              id="lastname"
+              placeholder="Prezime"
+              required
+            />
+          </div>
         </div>
         <div class="form-group">
           <label for="email">E-mail</label>
@@ -26,8 +40,20 @@
             id="email"
             placeholder="E-mail adresa"
             v-model="email"
+            v-bind:class="{
+              'form-control': true,
+              'is-invalid': !validEmail(email) && blured,
+            }"
+            v-on:blur="blured = true"
           />
+          <div class="invalid-feedback">
+            <i class="fas fa-info-circle"></i> Morate unijeti ispravan mail
+          </div>
+          <div class="text-danger" v-if="errorEmail">
+            <i class="fas fa-info-circle"></i> Ovaj mail se već koristi
+          </div>
         </div>
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="password">Zaporka</label>
@@ -36,10 +62,20 @@
               type="password"
               name="password"
               id="password"
+              autocomplete="on"
               v-model="password"
               placeholder="Zaporka"
+              v-bind:class="{
+                'form-control': true,
+                'is-invalid': !validPassword(password) && blured,
+              }"
+              v-on:blur="blured = true"
               required
             />
+            <div class="invalid-feedback">
+              <i class="fas fa-info-circle"></i> Najmanje 8 znakova i jedno
+              veliko slovo
+            </div>
           </div>
           <div class="form-group col-md-6">
             <label for="passwordRepeat">Ponovi zaporku</label>
@@ -49,15 +85,124 @@
               name="passwordRepeat"
               id="passwordRepeat"
               v-model="repeatPassword"
+              autocomplete="on"
+              v-bind:class="{
+                'form-control': true,
+                'is-invalid':
+                  !validRepeatPassword(password, repeatPassword) && blured,
+              }"
+              v-on:blur="blured = true"
               placeholder="Ponovi zaporku"
               required
             />
+            <div class="invalid-feedback">
+              <i class="fas fa-info-circle"></i> Lozinke moraju biti jednake
+            </div>
+          </div>
+        </div>
+        <label style="margin-bottom: 10px; border-bottom: 1px solid #daa520"
+          >Datum rođenja</label
+        >
+        <div class="form-row">
+          <div class="form-group col-md-2">
+            <label for="Dan">Dan</label>
+            <select name="Dan" class="form-control" v-model="dan" required>
+              <option value="">- Dan -</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="Mjesec">Mjesec</label>
+            <select
+              name="Mjesec"
+              class="form-control"
+              v-model="mjesec"
+              required
+            >
+              <option value="">- Mjesec -</option>
+              <option value="Siječanj">Siječanj</option>
+              <option value="Veljača">Veljača</option>
+              <option value="Ožujak">Ožujak</option>
+              <option value="Travanj">Travanj</option>
+              <option value="Svibanj">Svibanj</option>
+              <option value="Lipanj">Lipanj</option>
+              <option value="Srpanj">Srpanj</option>
+              <option value="Kolovoz">Kolovoz</option>
+              <option value="Rujan">Rujan</option>
+              <option value="Listopad">Listopad</option>
+              <option value="Studeni">Studeni</option>
+              <option value="Prosinac">Prosinac</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="year">Godina</label>
+            <input
+              class="form-control"
+              type="year"
+              name="year"
+              id="year"
+              v-model="godina"
+              placeholder="Godina"
+              v-bind:class="{
+                'form-control': true,
+                'is-invalid': !validGodina(godina) && blured,
+              }"
+              v-on:blur="blured = true"
+              required
+            />
+            <div class="invalid-feedback">
+              <i class="fas fa-info-circle"></i> Unesite valjanu godinu.
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <b-form-checkbox
+              style="color: #999"
+              id="checkbox-1"
+              name="checkbox-1"
+              value="accepted"
+              unchecked-value="not_accepted"
+              required
+            >
+              Ovim putem potvrđujem da imam 18 ili više godina.
+            </b-form-checkbox>
           </div>
         </div>
         <div class="m-t-lg">
           <ul class="list-inline">
             <li>
-              <input class="btn btn--form" type="button" value="Registracija" />
+              <input class="btn btn--form" type="submit" value="Registracija" />
             </li>
             <li>
               <a class="signup__link" style="color: white;">Imate račun? </a>
@@ -83,26 +228,78 @@ export default {
       email: "",
       password: "",
       repeatPassword: "",
+      dan: "",
+      mjesec: "",
+      godina: "",
+      blured: false,
+      valid: false,
+      errorEmail: false,
     };
   },
   methods: {
     registracija() {
-      if (this.password == this.repeatPassword) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.email, this.password)
-          .then((user) => {
-            console.log("Uspješna registracija");
-            alert("Uspješna registracija");
-            this.$router.push({ name: "Home" });
-          })
-          .catch(function(error) {
-            console.error("Došlo je do greške", error);
-            alert(error.message);
-          });
-        console.log("Nastavak");
-      } else {
-        alert("Password nije jednak repeat passwordu.");
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+          console.log("Uspješna registracija");
+          this.$router.push({ name: "Home" });
+          this.errorEmail = false;
+        })
+        .catch((error) => {
+          console.error("Došlo je do greške", error);
+          if (
+            error.message ==
+            "The email address is already in use by another account."
+          ) {
+            this.errorEmail = true;
+            console.log(this.errorE);
+          }
+        });
+      console.log("Nastavak");
+    },
+    validate: function() {
+      this.blured = true;
+      if (
+        this.validEmail(this.email) &&
+        this.validPassword(this.password) &&
+        this.validRepeatPassword(this.passwordRepeat) &&
+        this.validGodina(this.godina) &&
+        this.validDan(this.dan) &&
+        this.validMjesec(this.mjesec)
+      ) {
+        this.valid = true;
+      }
+    },
+
+    validEmail: function(email) {
+      var re = /(.+)@(.+){2,}\.(.+){2,}/;
+      return re.test(email.toLowerCase());
+    },
+
+    validPassword: function(password) {
+      let testPassword = /^[A-Z]/;
+      return password.length >= 8 && testPassword.test(password);
+    },
+
+    validMjesec: function(mjesec) {
+      return mjesec != "";
+    },
+    validDan: function(dan) {
+      return dan != "";
+    },
+    validRepeatPassword: function(password, repeatPassword) {
+      return password == repeatPassword;
+    },
+
+    validGodina: function(godina) {
+      return godina > 1920 && godina < 2022;
+    },
+    submit: function() {
+      console.log(this.dan, this.mjesec, this.godina);
+      this.validate();
+      if (this.valid) {
+        this.registracija();
       }
     },
   },

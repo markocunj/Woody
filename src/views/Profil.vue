@@ -136,23 +136,25 @@
                       <div class="form-group">
                         <label for="inputPassword5">Nova lozinka</label>
                         <input
-                          type="new-password"
+                          type="password"
                           class="form-control"
                           id="inputPassword5"
                           placeholder="Nova lozinka"
                           v-model="newPassword"
                           style="border: 1px solid gray;"
+                          autocomplete="on"
                         />
                       </div>
                       <div class="form-group">
                         <label for="inputPassword6">Potvrdite lozinku</label>
                         <input
-                          type="repeat-password"
+                          type="password"
                           class="form-control"
                           placeholder="Potvrdite lozinku"
                           id="inputPassword6"
                           v-model="confirmPassword"
                           style="border: 1px solid gray;"
+                          autocomplete="on"
                         />
                       </div>
 
