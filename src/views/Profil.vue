@@ -65,7 +65,8 @@
                       >Ime i prezime</label
                     >
                     <div class="form-control">
-                      {{ store.currentUser.displayName }}
+                      {{ store.trenutniKorisnik.ime }}
+                      {{ store.trenutniKorisnik.prezime }}
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -73,17 +74,19 @@
                       >Email</label
                     >
                     <div class="form-control">
-                      {{ store.currentUser.email }}
+                      {{ store.trenutniKorisnik.email }}
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
-                      >Broj telefona</label
+                      >Datum rođenja</label
                     >
                     <div class="form-control">
-                      {{ store.currentUser.phoneNumber }}
+                      {{ store.trenutniKorisnik.dan }}.
+                      {{ store.trenutniKorisnik.mjesec }}.
+                      {{ store.trenutniKorisnik.godina }}
                     </div>
                   </div>
                 </div>
@@ -113,7 +116,7 @@
                       >Email</label
                     >
                     <div class="form-control">
-                      {{ store.currentUser.email }}
+                      {{ store.trenutniKorisnik.email }}
                     </div>
                   </div>
                   <div class="form-group col-md-4">
@@ -196,6 +199,8 @@
 import { firebase } from "@/firebase";
 import router from "@/router";
 import store from "@/store.js";
+import { db } from "@/firebase";
+
 export default {
   name: "Profil",
   data() {
@@ -203,10 +208,33 @@ export default {
       store,
       newPassword: "",
       confirmPassword: "",
+      email: "",
     };
   },
   mounted() {
     console.log(store.currentUserLoggedInWithGoogleOrFacebook);
+    this.email = store.currentEmail;
+    db.collection("users")
+      .where("email", "==", this.email)
+      .get()
+      .then(function(querySnapshot) {
+        let korisnik = {};
+        store.trenutniKorisnik = {};
+        querySnapshot.forEach(function(doc) {
+          const data = doc.data();
+          korisnik = {
+            email: data.email,
+            dan: data.dan,
+            mjesec: data.mjesec,
+            godina: data.godina,
+            ime: data.ime,
+            prezime: data.prezime,
+            datum_registracije: data.datum_registracije,
+          };
+          store.trenutniKorisnik = korisnik;
+          console.log(store.trenutniKorisnik, "u izvlacenju");
+        });
+      });
   },
   methods: {
     odjava() {
@@ -215,6 +243,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.push({ name: "Home" });
+          store.currentEmail = "";
         });
     },
     promjenaLozinke() {

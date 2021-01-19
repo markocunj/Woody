@@ -77,7 +77,8 @@ firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email);
     store.currentUser = user;
-    console.log(user.displayName);
+    store.currentEmail = user.email;
+    console.log(store.currentEmail, "app vue email");
 
     if (!currentRoute.meta.needsUser) {
     }

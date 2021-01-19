@@ -104,6 +104,7 @@ export default {
         .then((result) => {
           this.$router.push({ name: "Home" });
           this.wrongEmailOrPassword = false;
+          console.log(store.currentEmail, "U prijavi");
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);

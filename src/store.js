@@ -4,4 +4,6 @@ export default {
   cartNumber: 0,
   currentUserLoggedInWithGoogleOrFacebook: false,
   currentSignedInUser: [],
+  trenutniKorisnik: {},
+  currentEmail: "",
 };

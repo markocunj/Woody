@@ -16,7 +16,8 @@
               name="name"
               id="name"
               placeholder="Ime"
-              required="true"
+              required
+              v-model="ime"
             />
           </div>
           <div class="form-group col-md-6">
@@ -28,6 +29,7 @@
               id="lastname"
               placeholder="Prezime"
               required
+              v-model="prezime"
             />
           </div>
         </div>
@@ -221,6 +223,9 @@
 
 <script>
 import { firebase } from "@/firebase.js";
+import { db } from "@/firebase";
+import store from "@/store";
+
 export default {
   name: "Registracija",
   data() {
@@ -228,6 +233,8 @@ export default {
       email: "",
       password: "",
       repeatPassword: "",
+      ime: "",
+      prezime: "",
       dan: "",
       mjesec: "",
       godina: "",
@@ -242,9 +249,11 @@ export default {
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((user) => {
-          console.log("Uspješna registracija");
-          this.$router.push({ name: "Home" });
+          console.log("Uspjesna registracija");
           this.errorEmail = false;
+          this.$router.push({
+            name: "Home",
+          });
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);
@@ -256,7 +265,6 @@ export default {
             console.log(this.errorE);
           }
         });
-      console.log("Nastavak");
     },
     validate: function() {
       this.blured = true;
@@ -269,6 +277,23 @@ export default {
         this.validMjesec(this.mjesec)
       ) {
         this.valid = true;
+        db.collection("users")
+          .add({
+            email: this.email,
+            dan: this.dan,
+            mjesec: this.mjesec,
+            godina: this.godina,
+            ime: this.ime,
+            prezime: this.prezime,
+            datum_registracije: Date.now(),
+          })
+          .then((doc) => {
+            console.log("Podaci spremljeni", doc);
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+        store.currentEmail = this.email;
       }
     },
 
@@ -296,7 +321,6 @@ export default {
       return godina > 1920 && godina < 2022;
     },
     submit: function() {
-      console.log(this.dan, this.mjesec, this.godina);
       this.validate();
       if (this.valid) {
         this.registracija();
