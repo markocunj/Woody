@@ -16,36 +16,61 @@
           <p class="card-text">
             {{ info.opis }}
           </p>
-          <div class="options d-flex flex-fill">
-            <b-form-input
-              name=""
-              class="ml-1"
-              type="number"
-              placeholder="Količina (u metrima)"
-              :state="provjeraKolicine"
-              v-model="kolicina"
-            ></b-form-input>
-            <b-form-select
-              class="custom-select ml-1"
-              v-model="duzina"
-              :state="provjeraDuzine"
-            >
-              <option selected value="">Dužina</option>
-              <option value="25">25</option>
-              <option value="33">33</option>
-              <option value="45">45</option>
-            </b-form-select>
-          </div>
-          <div class="buy d-flex justify-content-center align-items-center">
-            <button
-              type="submit"
-              href="#"
-              class="btn btn-secondary mt-4 btn-sm mr-1 mb-2"
-              @click="checkingBeforeAdding()"
-            >
-              <i class="fas fa-shopping-cart"></i> Dodavanje u košaricu
-            </button>
-          </div>
+          <form @submit.stop.prevent="submit">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="kolicina"><strong>Količina</strong></label>
+                <input
+                  name="kolicina"
+                  class="form-control"
+                  type="number"
+                  placeholder="Količina (u metrima)"
+                  v-model="kolicina"
+                  v-bind:class="{
+                    'form-control': true,
+                    'is-invalid': !validKolicina(kolicina) && blured,
+                  }"
+                  v-on:blur="blured = true"
+                />
+                <div class="invalid-feedback">
+                  <i class="fas fa-info-circle"></i> Unesite vrijednost između 2
+                  metra i 50 metara.
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="duzina"><strong>Dužina</strong></label>
+                <select
+                  name="duzina"
+                  class="form-control"
+                  v-model="duzina"
+                  required
+                >
+                  <option selected value="">Dužina</option>
+                  <option value="25">25</option>
+                  <option value="33">33</option>
+                  <option value="45">45</option>
+                </select>
+              </div>
+            </div>
+            <div class="buy justify-content-center">
+              <button
+                type="submit"
+                href="#"
+                class="btn btn-secondary mt-4 btn-sm mr-1 mb-2"
+                v-bind:class="{
+                  'form-control': true,
+                  'is-valid': dodano,
+                }"
+                v-on:blur="dodano = false"
+              >
+                <i class="fas fa-shopping-cart"></i> Dodavanje u košaricu
+              </button>
+              <div class="valid-feedback">
+                <i class="fas fa-info-circle"></i> Uspješno ste dodali narudžbu
+                u košaricu!
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -62,6 +87,8 @@ export default {
     return {
       kolicina: "",
       duzina: "",
+      blured: false,
+      dodano: false,
     };
   },
   props: ["info"],
@@ -73,7 +100,7 @@ export default {
         addingItem = {
           kolicina: this.kolicina,
           duzina: this.duzina,
-          cijena: this.info.cijena,
+          cijena: this.info.cijena * this.kolicina,
           naslov: this.info.naslov,
           podnaslov: this.info.podnaslov,
         };
@@ -82,18 +109,23 @@ export default {
         store.cartNumber += 1;
       }
     },
-    checkingBeforeAdding() {
-      if (this.kolicina != "" && this.duzina != "") {
-        this.addingToCart();
+    validate: function() {
+      this.blured = true;
+      if (this.validKolicina(this.kolicina)) {
+        this.dodano = true;
+        this.valid = true;
       }
     },
-  },
-  computed: {
-    provjeraDuzine() {
-      return this.duzina != "";
+
+    validKolicina: function(kolicina) {
+      return kolicina > 1 && kolicina < 50;
     },
-    provjeraKolicine() {
-      return this.kolicina != "";
+
+    submit: function() {
+      this.validate();
+      if (this.valid) {
+        this.addingToCart();
+      }
     },
   },
 };
@@ -119,7 +151,7 @@ export default {
 }
 .product {
   background: #daa520;
-  transform: translateY(30%);
+  transform: translateY(13%);
 }
 .align-items-center {
   -ms-flex-align: center !important;

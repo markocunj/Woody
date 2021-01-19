@@ -26,7 +26,9 @@
       <div class="card-footer">
         <div class="form-row pull-right">
           <div class="" style="margin: 10px">
-            <a href="" class="btn btn-success pull-right">Checkout</a>
+            <router-link to="checkout">
+              <a class="btn btn-success pull-right">Checkout</a></router-link
+            >
           </div>
         </div>
         <div class="form-row justify-content-left">

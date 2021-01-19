@@ -1,7 +1,7 @@
 <template>
-  <div class="prijava">
+  <div class="prijava" style="padding-top: 50px; padding-bottom: 50px;">
     <hr class="my-4" style="color: #616D6D; border: 1px solid; width: 40%" />
-    <div class="container">
+    <div class="container" style="margin-top: 30px;">
       <div class="form-row justify-content-center">
         <div class="form-group col-md-4">
           <div class="card sign-in">

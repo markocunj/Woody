@@ -8,6 +8,7 @@ import Kontakt from "../views/Kontakt.vue";
 import Profil from "../views/Profil.vue";
 import store from "@/store";
 import ShoppingCart from "../views/ShoppingCart.vue";
+import CheckoutForm from "../views/CheckoutForm.vue";
 
 Vue.use(VueRouter);
 
@@ -55,6 +56,14 @@ const routes = [
     path: "/kosarica",
     name: "Kosarica",
     component: ShoppingCart,
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: CheckoutForm,
+    meta: {
+      needsUser: true,
+    },
   },
 ];
 
