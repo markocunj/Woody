@@ -65,10 +65,53 @@
                   <i class="fas fa-info-circle"></i> Neispravan e-mail ili
                   šifra.
                 </div>
-                <button type="submit" class="btn btn1 btn-light btn-block">
+                <hr
+                  style="color: #616D6D; border: 1px solid; width: 20%; margin-bottom: 3px;"
+                />
+                <small href="#" class="text-muted"
+                  ><a
+                    href="#"
+                    @click="promjenaLozinke()"
+                    style="color: #ccc"
+                    data-toggle="modal"
+                    data-target="#promjenaLozinke"
+                    >Zaboravili ste lozinku?</a
+                  ></small
+                >
+
+                <button
+                  type="submit"
+                  class="btn btn1 btn-light btn-block"
+                  style="margin-top: 15px;"
+                >
                   Prijava
                 </button>
               </form>
+              <div
+                class="modal fade"
+                id="promjenaLozinke"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="promjenaLozinke1"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header justify-content-center">
+                      E-mail za promjenu lozinke poslan!
+                    </div>
+                    <div class="modal-body">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                      >
+                        Super!
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
           </div>
         </div>
@@ -141,6 +184,19 @@ export default {
           console.log(credential);
         });
     },
+    promjenaLozinke() {
+      var auth = firebase.auth();
+      var emailAddress = this.email;
+
+      auth
+        .sendPasswordResetEmail(emailAddress)
+        .then(function() {
+          console.log("Password reset sent");
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
+    },
 
     validate: function() {
       this.blured = true;
@@ -165,7 +221,7 @@ export default {
 </script>
 
 <style scoped>
-.btn1 {
+.btn1 .btn-primary {
   background-color: transparent;
   color: #daa520;
 }

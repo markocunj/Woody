@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="well well-sm">
-            <form class="form-horizontal" action="" method="post">
+            <form @submit.stop.prevent="submit">
               <fieldset>
                 <legend class="text-center">Contact us</legend>
 
@@ -34,6 +34,7 @@
                       type="text"
                       placeholder="Your email"
                       class="form-control"
+                      v-model="email"
                     />
                   </div>
                 </div>
@@ -72,8 +73,17 @@
 </template>
 
 <script>
+import { firebase, db } from "@/firebase";
+
 export default {
   name: "Kontakt",
+  data() {
+    return {
+      email: "",
+    };
+  },
+
+  methods: {},
 };
 </script>
 

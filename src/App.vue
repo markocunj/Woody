@@ -75,13 +75,9 @@ import store from "@/store.js";
 firebase.auth().onAuthStateChanged((user) => {
   const currentRoute = router.currentRoute;
   if (user) {
-    console.log(user.email);
     store.currentUser = user;
+    store.emailVerified = user.emailVerified;
     store.currentEmail = user.email;
-    console.log(store.currentEmail, "app vue email");
-
-    if (!currentRoute.meta.needsUser) {
-    }
   } else {
     console.log("No user");
     store.currentUser = null;

@@ -6,4 +6,5 @@ export default {
   currentSignedInUser: [],
   trenutniKorisnik: {},
   currentEmail: "",
+  emailVerified: false,
 };

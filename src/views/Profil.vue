@@ -36,21 +36,6 @@
                   >Povijest narudžbi</a
                 >
               </li>
-              <li
-                class="nav-item"
-                v-if="!store.currentUserLoggedInWithGoogleOrFacebook"
-              >
-                <a
-                  class="nav-link"
-                  id="promjenaLozinke-tab"
-                  data-toggle="tab"
-                  href="#promjenaLozinke"
-                  role="tab"
-                  aria-controls="promjenaLozinke"
-                  aria-selected="false"
-                  >Promjena lozinke</a
-                >
-              </li>
             </ul>
             <div class="tab-content profile-tab" id="myTabContent">
               <div
@@ -71,16 +56,6 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label style="border-bottom: 1px solid #daa520"
-                      >Email</label
-                    >
-                    <div class="form-control">
-                      {{ store.trenutniKorisnik.email }}
-                    </div>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520"
                       >Datum rođenja</label
                     >
                     <div class="form-control">
@@ -89,13 +64,56 @@
                       {{ store.trenutniKorisnik.godina }}
                     </div>
                   </div>
+                  <div class="form-group col-md-4">
+                    <label style="border-bottom: 1px solid #daa520"
+                      >Email</label
+                    >
+                    <div class="form-control">
+                      {{ store.trenutniKorisnik.email }}
+                      <div
+                        type="button"
+                        class="form-control"
+                        v-if="!store.emailVerified"
+                        @click="potvrdiEmail()"
+                        data-toggle="modal"
+                        data-target="#potvrdaEmaila"
+                      >
+                        <a href="#" style="color: red;"> (Potvrdi email)</a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="form-row">
+                <div
+                  class="modal fade"
+                  id="potvrdaEmaila"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="promjenaEmaila2"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header justify-content-center">
+                        E-mail za potvrdu računa poslan!
+                      </div>
+                      <div class="modal-body">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-dismiss="modal"
+                        >
+                          Super!
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-row  justify-content-center">
                   <div class="form-group col-md-4">
                     <button
                       type="button"
                       class="btn btn-block"
-                      style="border: 1px solid #daa520; "
+                      style="border: 1px solid #daa520; margin-top: 50px;"
                       @click="odjava()"
                     >
                       Odjava
@@ -127,67 +145,6 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="tab-pane fade"
-                id="promjenaLozinke"
-                role="tabpanel"
-                aria-labelledby="promjenaLozinke-tab"
-              >
-                <form>
-                  <div class="row mb-4">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="inputPassword5">Nova lozinka</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          id="inputPassword5"
-                          placeholder="Nova lozinka"
-                          v-model="newPassword"
-                          style="border: 1px solid gray;"
-                          autocomplete="on"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="inputPassword6">Potvrdite lozinku</label>
-                        <input
-                          type="password"
-                          class="form-control"
-                          placeholder="Potvrdite lozinku"
-                          id="inputPassword6"
-                          v-model="confirmPassword"
-                          style="border: 1px solid gray;"
-                          autocomplete="on"
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        style="margin-bottom: 10px;"
-                        @click="promjenaLozinke()"
-                      >
-                        Promjena lozinke
-                      </button>
-                    </div>
-                    <div
-                      class="col-md-6"
-                      style="border: 1px solid gray; padding: 10px; border-radius: 10px"
-                    >
-                      <p class="mb-2">Zahtjevi lozinke</p>
-                      <p class="small text-muted mb-2">
-                        Da bi postavili novu lozinku, morate pratiti sljedeće
-                        zahtjeve:
-                      </p>
-                      <ul class="small text-muted pl-4 mb-0">
-                        <li>Najmanje 8 slova</li>
-                        <li>Najmanje jedan broj</li>
-                        <li>Ne može biti jednaka kao prošla lozinka</li>
-                      </ul>
-                    </div>
-                  </div>
-                </form>
-              </div>
             </div>
           </div>
         </div>
@@ -212,7 +169,11 @@ export default {
     };
   },
   mounted() {
-    console.log(store.currentUserLoggedInWithGoogleOrFacebook);
+    console.log(store.emailVerified, "Email verified");
+    console.log(
+      store.currentUserLoggedInWithGoogleOrFacebook,
+      "User logged in with google or facebook."
+    );
     this.email = store.currentEmail;
     db.collection("users")
       .where("email", "==", this.email)
@@ -246,25 +207,16 @@ export default {
           store.currentEmail = "";
         });
     },
-    promjenaLozinke() {
+    potvrdiEmail() {
       var user = firebase.auth().currentUser;
-      if (this.newPassword == this.confirmPassword) {
-        user
-          .updatePassword(this.newPassword)
-          .then(() => {
-            alert("Usspješna promjena.");
-            this.newPassword = "";
-            this.confirmPassword = "";
-          })
-          .catch((error) => {
-            console.error(error);
-            alert(error.message);
-          });
-      } else {
-        alert("Lozinke moraju biti jednake");
-        this.newPassword = "";
-        this.confirmPassword = "";
-      }
+      user
+        .sendEmailVerification()
+        .then(function() {
+          console.log("Mail poslan");
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
     },
   },
 };

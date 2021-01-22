@@ -119,28 +119,56 @@
                     mail
                   </div>
                 </div>
-                <div class="form-group">
-                  <input
-                    placeholder="Lozinka"
-                    class="form-control"
-                    type="password"
-                    v-model="password"
-                    autocomplete="on"
-                    required
-                  />
-                </div>
-                <div
-                  class="text-danger"
-                  v-if="wrongPasswordOrEmail"
-                  style="margin-bottom: 10px;"
+                <hr
+                  style="color: #616D6D; border: 1px solid; width: 20%; margin-bottom: 3px;"
+                />
+                <small href="#" class="text-muted"
+                  ><a
+                    href="#"
+                    @click="promjenaLozinke()"
+                    style="color: #ccc"
+                    data-toggle="modal"
+                    data-target="#promjenaLozinke2"
+                    >Zaboravili ste lozinku?</a
+                  ></small
                 >
-                  <i class="fas fa-info-circle"></i> Neispravan e-mail ili
-                  šifra.
-                </div>
-                <button type="submit" class="btn btn1 btn-light btn-block">
+
+                <button
+                  type="submit"
+                  class="btn btn1 btn-light btn-block"
+                  style="margin-top: 15px;"
+                >
                   Prijava
                 </button>
               </form>
+              <div
+                class="modal fade"
+                id="promjenaLozinke2"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="promjenaLozinke2"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div
+                      class="modal-header justify-content-center"
+                      style="color: black"
+                    >
+                      E-mail za promjenu lozinke poslan!
+                    </div>
+                    <div class="modal-body">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        data-dismiss="modal"
+                      >
+                        Super!
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
           </div>
           <!-- card.// -->
@@ -215,6 +243,19 @@ export default {
           }
         });
       console.log("Nastavak");
+    },
+    promjenaLozinke() {
+      var auth = firebase.auth();
+      var emailAddress = this.email;
+
+      auth
+        .sendPasswordResetEmail(emailAddress)
+        .then(function() {
+          console.log("Password reset sent");
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
     },
     googleLogin() {
       var provider = new firebase.auth.GoogleAuthProvider();

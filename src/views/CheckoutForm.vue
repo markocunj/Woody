@@ -38,7 +38,12 @@
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Podaci za dostavu</h4>
-        <form @submit.stop.prevent="submit">
+        <form
+          @submit.stop.prevent="submit"
+          action="mailto:woody.webshop@gmail.com"
+          method="post"
+          enctype="text/plain"
+        >
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="ime">Ime</label>
@@ -262,7 +267,7 @@ export default {
     submit: function() {
       this.validate();
       if (this.valid) {
-        this.prijava();
+        this.$router.push({ name: "Home" });
       }
     },
   },

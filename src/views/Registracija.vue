@@ -251,9 +251,7 @@ export default {
         .then((user) => {
           console.log("Uspjesna registracija");
           this.errorEmail = false;
-          this.$router.push({
-            name: "Home",
-          });
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           console.error("Došlo je do greške", error);
