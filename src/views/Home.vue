@@ -112,12 +112,28 @@
                       'is-invalid': !validEmail(email) && blured,
                     }"
                     v-on:blur="blured = true"
-                    required
                   />
                   <div class="invalid-feedback">
                     <i class="fas fa-info-circle"></i> Morate unijeti ispravan
                     mail
                   </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    placeholder="Lozinka"
+                    class="form-control"
+                    type="password"
+                    v-model="password"
+                    autocomplete="on"
+                  />
+                </div>
+                <div
+                  class="text-danger"
+                  v-if="wrongPasswordOrEmail"
+                  style="margin-bottom: 10px;"
+                >
+                  <i class="fas fa-info-circle"></i> Neispravan e-mail ili
+                  šifra.
                 </div>
                 <hr
                   style="color: #616D6D; border: 1px solid; width: 20%; margin-bottom: 3px;"
@@ -128,7 +144,7 @@
                     @click="promjenaLozinke()"
                     style="color: #ccc"
                     data-toggle="modal"
-                    data-target="#promjenaLozinke2"
+                    data-target="#promjenaLozinke"
                     >Zaboravili ste lozinku?</a
                   ></small
                 >

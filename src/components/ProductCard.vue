@@ -59,15 +59,20 @@
                 class="btn btn-secondary mt-4 btn-sm mr-1 mb-2"
                 v-bind:class="{
                   'form-control': true,
-                  'is-valid': dodano,
+                  'is-valid': dodano && !neuspjeh,
+                  'is-invalid': neuspjeh,
                 }"
-                v-on:blur="dodano = false"
+                v-on:blur="valid = false"
               >
                 <i class="fas fa-shopping-cart"></i> Dodavanje u košaricu
               </button>
               <div class="valid-feedback">
                 <i class="fas fa-info-circle"></i> Uspješno ste dodali narudžbu
                 u košaricu!
+              </div>
+              <div class="invalid-feedback">
+                <i class="fas fa-info-circle"></i> Ne možete staviti istu vrstu
+                drva više puta u košaricu!
               </div>
             </div>
           </form>
@@ -78,7 +83,6 @@
 </template>
 
 <script>
-import background from "@/assets/background.jpg";
 import store from "@/store";
 
 export default {
@@ -89,13 +93,20 @@ export default {
       duzina: "",
       blured: false,
       dodano: false,
+      neuspjeh: false,
     };
   },
   props: ["info"],
 
   methods: {
+    idPostoji(id) {
+      return store.addingToCart.some(function(el) {
+        return el.id === id;
+      });
+    },
     addingToCart() {
-      if (this.kolicina != "" && this.duzina != "") {
+      console.log(this.info.id);
+      if (!this.idPostoji(this.info.id)) {
         let addingItem = {};
         addingItem = {
           kolicina: this.kolicina,
@@ -103,10 +114,14 @@ export default {
           cijena: this.info.cijena * this.kolicina,
           naslov: this.info.naslov,
           podnaslov: this.info.podnaslov,
+          id: this.info.id,
         };
         console.log("Item added");
         store.addingToCart.push(addingItem);
         store.cartNumber += 1;
+        this.$router.push({ name: "Kosarica" });
+      } else {
+        this.neuspjeh = true;
       }
     },
     validate: function() {

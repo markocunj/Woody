@@ -1,241 +1,231 @@
 <template>
-  <div class="cashout">
-    <div class="cjeli">
-      <div class="naslov">
-        <div class="stavke">
-          <div style="padding: 26px 30px 16px">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            Shopping cart
+  <div class="container">
+    <!--Section: Block Content-->
+    <section>
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-8">
+          <!-- Card -->
+          <div class="mb-3">
+            <div class="pt-4 wish-list">
+              <h5 class="mb-4">
+                <strong>Cart (<span>2</span> items)</strong>
+              </h5>
+              <hr class="mb-4" />
+              <cart-item
+                v-for="cart in carts"
+                :key="cart.id"
+                :cartInfo="cart"
+              />
+              <div>
+                <a
+                  href="#!"
+                  type="button"
+                  class="card-link-secondary pull-right text-uppercase mr-3"
+                  ><i class="fas fa-trash-alt mr-1"></i> Remove item
+                </a>
+              </div>
+              <br />
+              <p class="text-primary mb-0">
+                <i class="fas fa-info-circle mr-1"></i> Dodavanje u košaricu ne
+                znači da su vaša drva rezervirana. Ne čekajte dugo!
+              </p>
+            </div>
           </div>
+          <!--           -->
+
+          <!-- Card -->
+          <div class="mb-3">
+            <div class="pt-4">
+              <h5 class="mb-4">Očekivani datum dostave:</h5>
+
+              <p class="mb-0">{{ datumIsporukeOD }} - {{ datumIsporukeDO }}</p>
+            </div>
+          </div>
+          <!-- Card -->
+
+          <!-- Card -->
+          <div class="mb-3">
+            <div class="pt-3">
+              <h5 class="mb-4">Primamo:</h5>
+
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                alt="Visa"
+              />
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                alt="Mastercard"
+              />
+              <img
+                class="mr-2"
+                width="45px"
+                src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+                alt="PayPal acceptance mark"
+              />
+            </div>
+          </div>
+          <!-- Card -->
         </div>
-        <div class="">
-          <ul v-for="cart in carts" :key="cart.id" :cartInfo="cart">
-            <!-- PRODUCT -->
-            <li>
-              <div style=" padding: 30px 0px; font-size: 0.8em ;">
-                <span class="span1"
-                  ><img
-                    src="../assets/bukva.jpg"
-                    style="width: 100%; padding: 10px; height: 140px"
-                  />
-                </span>
-                <div style="padding-top:30px;">
-                  <p style="float:left">{{ cart.cijena }}kn</p>
-                  <button
-                    type="button"
-                    class="btn btn-outline-danger btn-xs btnBrisanje"
-                    @click="brisanje()"
-                  >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                  <br />
-                  <p style="float: left ">{{ cart.naslov }}</p>
-                  <br />
-                  <p style="float: left">{{ cart.podnaslov }}</p>
+        <!--Grid column-->
 
-                  <div
-                    class="quantity-toggle"
-                    style="float: right; height:30px;display:flex;"
-                  >
-                    <button @click="decrement()">&mdash;</button>
-                    <input type="text" :value="quantity" />
-                    <button @click="increment()">&#xff0b;</button>
+        <!--Grid column-->
+        <div class="col-lg-4">
+          <!-- Card -->
+          <div class="mb-3">
+            <div class="pt-4">
+              <h5 class="mb-3">The total amount of</h5>
+
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
+                >
+                  Temporary amount
+                  <span>$25.98</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center px-0"
+                >
+                  Shipping
+                  <span>Gratis</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
+                >
+                  <div>
+                    <strong>The total amount of</strong>
+                    <strong>
+                      <p class="mb-0">(including VAT)</p>
+                    </strong>
                   </div>
-                  <small
-                    class="text-muted"
-                    style="float: left; padding: 0 10px 0 10px;"
-                    >Kolicina: {{ cart.kolicina }}m
+                  <span
+                    ><strong>{{ konacnaCijena.toFixed(2) }} kn</strong></span
+                  >
+                </li>
+              </ul>
 
-                    <br />Duzina: {{ cart.duzina }}cm
-                  </small>
+              <button type="button" class="btn btn-primary btn-block">
+                Nastavite na plaćanje!
+              </button>
+            </div>
+          </div>
+          <!-- Card -->
+
+          <!-- Card -->
+          <div class="mb-3">
+            <div class="pt-4">
+              <a
+                class="dark-grey-text d-flex justify-content-between"
+                data-toggle="collapse"
+                href="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Add a discount code (optional)
+                <span><i class="fas fa-chevron-down pt-1"></i></span>
+              </a>
+
+              <div class="collapse" id="collapseExample">
+                <div class="mt-3">
+                  <div class="md-form md-outline mb-0">
+                    <input
+                      type="text"
+                      id="discount-code"
+                      class="form-control font-weight-light"
+                      placeholder="Enter discount code"
+                    />
+                  </div>
                 </div>
               </div>
-            </li>
-
-            <!-- END PRODUCT -->
-          </ul>
-          <div class="" v-if="carts"></div>
-        </div>
-      </div>
-    </div>
-    <div class="desno">
-      <div class="desniNaslov">
-        <div class="">
-          <div class="overlej">
-            <span class="cijena">Konačna cijena: </span>
-
-            <p style="color:#fff; padding:5px; ">{{ konacnaCijena }}kn</p>
+            </div>
           </div>
+          <!-- Card -->
         </div>
-        <div class="" style="width: 100%;">
-          <div class="" style="padding:10px">
-            <a
-              href=""
-              class="btn btn-success"
-              style="background: #212529;border-color:#daa520;border-style:solid;border-width:1px;font-color:#fff;"
-              >Checkout</a
-            >
-          </div>
-        </div>
+        <!--Grid column-->
       </div>
-    </div>
+      <!-- Grid row -->
+    </section>
   </div>
 </template>
 
-/*max-width: 960px; min-width: 500px;top: 10px; position: fixed; */
-
 <script>
-  import CartItem from "@/components/CartItem.vue";
-  import store from "@/store";
-  import router from "@/router";
+import CartItem from "@/components/CartItem.vue";
+import store from "@/store";
+import moment from "moment";
 
-  export default {
-    name: "ShoppingCart",
-    data() {
-      return {
-        carts: [],
-        konacnaCijena: 0,
-        quantity: 1,
-      };
-    },
-    mounted() {
-      if (store.addingToCart) {
-        for (let i = 0; i < store.addingToCart.length; i++) {
-          this.carts.push(store.addingToCart[i]);
-          console.log("Uspjeh");
-          this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
-        }
+export default {
+  name: "ShoppingCart",
+  data() {
+    return {
+      carts: [],
+      konacnaCijena: 0,
+      quantity: 1,
+      datum: "",
+      moment,
+    };
+  },
+  mounted() {
+    if (store.addingToCart) {
+      for (let i = 0; i < store.addingToCart.length; i++) {
+        this.carts.push(store.addingToCart[i]);
+        console.log("Uspjeh prvi");
+        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
       }
+    }
+  },
+  components: {
+    CartItem,
+  },
+  methods: {
+    brisanje() {
+      for (let i = 0; i < this.carts.length; i++) {
+        this.carts.push(store.addingToCart[i]);
+        console.log("Uspjeh");
+        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
+      }
+
+      /*this.carts = [];
+      store.addingToCart = [];
+      this.konacnaCijena = 0;
+      store.cartNumber = 0;*/
     },
-    components: {
-      CartItem,
+  },
+  computed: {
+    datumIsporukeOD() {
+      moment.locale("hr");
+      let datum = Date.now();
+      return moment(datum)
+        .add(7, "days")
+        .format("D. MMMM. YYYY");
     },
-    methods: {
-      brisanje() {
-        this.carts = [];
-        store.addingToCart = [];
-        this.konacnaCijena = 0;
-        store.cartNumber = 0;
-      },
+    datumIsporukeDO() {
+      moment.locale("hr");
+      let datum = Date.now();
+      return moment(datum)
+        .add(10, "days")
+        .format("D. MMMM. YYYY");
     },
-  };
+  },
+};
 </script>
 <style scoped>
-  button {
-    background: #f5f5f5;
-    color: #888;
-    font-size: 12px;
-    cursor: pointer;
-    background: #212529;
-  }
-  p {
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-  }
-  .cashout {
-    max-width: 960px;
-    min-width: 500px;
-    padding: 10px;
-    margin: 0 auto;
-    background: #212529;
-  }
-  .cjeli {
-    width: 60.6382978723%;
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-  }
-  .naslov {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    width: 100%;
-    padding: 0 30px;
-  }
-  .stavke {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    width: 100%;
-    padding: 0 30px;
-  }
-  ul {
-    padding: 10px;
-    min-height: 140px;
-    position: relative;
-    color: #fff;
-    border-width: 0px 0px 3px 0px;
-    border-style: solid;
-  }
-  li {
-    padding: 0px 20px;
-    height: 200px;
-    font-size: 1.2em;
-    list-style: none;
-    list-style-image: none;
-    margin: 0;
-    margin-bottom: 0px;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
-  .span1 {
-    float: left;
-    font-size: 30px;
-    height: 140px;
-    vertical-align: top;
-    float: left;
-    width: 110px;
-  }
-  .btnBrisanje {
-    padding: 0 20px;
-    float: right;
-    margin-right: 5px;
-    background: #212529;
-  }
-  input {
-    width: 2.5rem;
-    text-align: center;
-    background: #212529;
-    color: #fff;
-  }
-  .desno {
-    max-width: 370px;
-    padding-left: 10px;
-    transform: translate3d(0, 0, 0);
-    top: 0 !important;
-    width: 39.3617021277%;
-    width: 39.5833333333%;
-    display: inline-block;
-  }
-  .desniNaslov {
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    width: 100%;
-  }
-  .cijena {
-    border-width: 0px 0px 3px 0px;
-    border-style: solid;
-    width: 100%;
-    color: #fff;
-  }
-  .overlej {
-    padding: 26px 30px 16px;
-    padding: 20px;
-  }
-  @media (max-width: 962px) {
-    .cjeli {
-      width: 100%;
-      display: block;
-    }
-    .cashout {
-      min-width: 360px;
-      padding: 0px;
-      margin: 0;
-    }
-    .naslov {
-      padding: 0px;
-    }
-  }
+button {
+  background: #f5f5f5;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  background: #daa520;
+}
+.container {
+  background-color: white;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border-radius: 15px;
+  padding: 50px;
+}
 </style>

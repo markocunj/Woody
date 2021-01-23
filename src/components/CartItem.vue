@@ -1,5 +1,56 @@
 <template>
-  <div class="form-row">
+  <div class="row mb-4">
+    <div class="col-md-5 col-lg-3 col-xl-3">
+      <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+        <img
+          class="img-fluid w-100"
+          src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
+          alt="Sample"
+        />
+      </div>
+    </div>
+    <div class="col-md-7 col-lg-9 col-xl-9">
+      <div>
+        <div class="d-flex justify-content-between">
+          <div>
+            <h5>{{ cartInfo.naslov }}</h5>
+            <p class="mb-3 text-muted text-uppercase small">
+              {{ cartInfo.podnaslov }}
+            </p>
+            <p class="mb-2 text-muted small">
+              Količina: {{ cartInfo.kolicina }} metara
+            </p>
+            <p class="mb-3 text-muted small">
+              Dužina: {{ cartInfo.duzina }} cm
+            </p>
+          </div>
+          <div>
+            <a
+              type="button"
+              class="card-link-secondary small text-uppercase mr-3"
+              ><i class="fas fa-info-circle mr-1"></i> {{ cartInfo.id }}
+            </a>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div></div>
+          <p class="mb-0">
+            <span
+              ><strong id="summary"
+                >{{ cartInfo.cijena.toFixed(2) }} kn</strong
+              ></span
+            >
+          </p>
+        </div>
+      </div>
+      <hr class="mb-4" />
+    </div>
+  </div>
+</template>
+
+<script>
+/*
+    <div class="form-row">
     <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-8">
       <h4 class="product-name">
         <strong>{{ cartInfo.naslov }}</strong>
@@ -21,9 +72,8 @@
       </div>
     </div>
   </div>
-</template>
+*/
 
-<script>
 import store from "@/store";
 export default {
   props: ["cartInfo"],

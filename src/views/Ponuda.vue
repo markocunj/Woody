@@ -16,7 +16,7 @@ cards = [
     opis:
       "Drvo za ogrijev bukva, odlično za brzo podizanje temperature. Dužinu i količinu birate sami.",
     cijena: 430,
-    id: Math.random(),
+    id: "BKV",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -25,7 +25,7 @@ cards = [
     opis:
       "Drvo za ogrijev grab, odlično za držanje visoke temperature gorenja na duže vrijeme. Dužinu i količinu birate sami.",
     cijena: 430,
-    id: Math.random(),
+    id: "GRB",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -34,7 +34,7 @@ cards = [
     opis:
       "Najbolje u kombinaciji sa grabom/bukvom za odlične rezultate dugoročnog gorijenja. Dužinu i količinu birate sami.",
     cijena: 380,
-    id: Math.random(),
+    id: "JSN",
   },
   {
     url: "https://i.ibb.co/nb7gNsY/grab.jpg",
@@ -43,7 +43,7 @@ cards = [
     opis:
       "Najbolje drvo, uz bukvu i grab, za hladne zimske dane (pogotovo ako je suho). Dužinu i količinu birate sami.",
     cijena: 400,
-    id: Math.random(),
+    id: "HRST",
   },
 ];
 
@@ -60,8 +60,8 @@ export default {
 };
 </script>
 <style scoped>
-  .red {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.red {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
