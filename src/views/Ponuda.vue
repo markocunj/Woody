@@ -10,39 +10,39 @@ let cards = [];
 
 cards = [
   {
-    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
+    url: require("../assets/bukvaKosarica.jpg"),
     naslov: "Bukva",
     podnaslov: "Drvo za ogrijev bukva",
     opis:
       "Drvo za ogrijev bukva, odlično za brzo podizanje temperature. Dužinu i količinu birate sami.",
-    cijena: 430,
+    cijena: 429.99,
     id: "BKV",
   },
   {
-    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
+    url: require("../assets/grabKosarica.jpg"),
     naslov: "Grab",
     podnaslov: "Drvo za ogrijev grab",
     opis:
       "Drvo za ogrijev grab, odlično za držanje visoke temperature gorenja na duže vrijeme. Dužinu i količinu birate sami.",
-    cijena: 430,
+    cijena: 429.99,
     id: "GRB",
   },
   {
-    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
+    url: require("../assets/jasenKosarica.jpg"),
     naslov: "Jasen",
     podnaslov: "Drvo za ogrijev jasen",
     opis:
       "Najbolje u kombinaciji sa grabom/bukvom za odlične rezultate dugoročnog gorijenja. Dužinu i količinu birate sami.",
-    cijena: 380,
+    cijena: 379.99,
     id: "JSN",
   },
   {
-    url: "https://i.ibb.co/nb7gNsY/grab.jpg",
+    url: require("../assets/hrastKosarica.jpg"),
     naslov: "Hrast",
     podnaslov: "Drvo za ogrijev hrast",
     opis:
       "Najbolje drvo, uz bukvu i grab, za hladne zimske dane (pogotovo ako je suho). Dužinu i količinu birate sami.",
-    cijena: 400,
+    cijena: 399.99,
     id: "HRST",
   },
 ];

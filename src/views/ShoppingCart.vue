@@ -10,24 +10,16 @@
           <div class="mb-3">
             <div class="pt-4 wish-list">
               <h5 class="mb-4">
-                <strong>Cart (<span>2</span> items)</strong>
+                <strong>Košarica {{ brojStvariUKosarici }}</strong>
               </h5>
               <hr class="mb-4" />
               <cart-item
-                v-for="cart in carts"
-                :key="cart.id"
-                :cartInfo="cart"
+                v-for="addingToCart in store.addingToCart"
+                :key="addingToCart.id"
+                :cartInfo="addingToCart"
               />
-              <div>
-                <a
-                  href="#!"
-                  type="button"
-                  class="card-link-secondary pull-right text-uppercase mr-3"
-                  ><i class="fas fa-trash-alt mr-1"></i> Remove item
-                </a>
-              </div>
               <br />
-              <p class="text-primary mb-0">
+              <p class="text-primary mb-0" style="color: #daa520 !important">
                 <i class="fas fa-info-circle mr-1"></i> Dodavanje u košaricu ne
                 znači da su vaša drva rezervirana. Ne čekajte dugo!
               </p>
@@ -40,7 +32,9 @@
             <div class="pt-4">
               <h5 class="mb-4">Očekivani datum dostave:</h5>
 
-              <p class="mb-0">{{ datumIsporukeOD }} - {{ datumIsporukeDO }}</p>
+              <p class="mb-0" v-if="store.cartNumber > 0">
+                {{ datumIsporukeOD }} - {{ datumIsporukeDO }}
+              </p>
             </div>
           </div>
           <!-- Card -->
@@ -77,73 +71,55 @@
         <!--Grid column-->
         <div class="col-lg-4">
           <!-- Card -->
-          <div class="mb-3">
+          <div class="mb-3 sticky-top">
             <div class="pt-4">
-              <h5 class="mb-3">The total amount of</h5>
+              <h5 class="mb-3">Ukupni iznos</h5>
 
               <ul class="list-group list-group-flush">
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0"
                 >
-                  Temporary amount
-                  <span>$25.98</span>
+                  Cijena
+                  <span>{{ store.konacnaCijena.toFixed(2) }} kn</span>
                 </li>
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center px-0"
                 >
-                  Shipping
-                  <span>Gratis</span>
+                  Dostava
+                  <span>+{{ cijenaDostave }} kn</span>
                 </li>
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3"
                 >
                   <div>
-                    <strong>The total amount of</strong>
+                    <strong>Ukupna cijena</strong>
                     <strong>
-                      <p class="mb-0">(including VAT)</p>
+                      <p class="mb-0">(sa PDV-om)</p>
                     </strong>
                   </div>
                   <span
-                    ><strong>{{ konacnaCijena.toFixed(2) }} kn</strong></span
+                    ><strong
+                      >{{
+                        (store.konacnaCijena + cijenaDostave).toFixed(2)
+                      }}
+                      kn</strong
+                    ></span
                   >
                 </li>
               </ul>
-
-              <button type="button" class="btn btn-primary btn-block">
-                Nastavite na plaćanje!
-              </button>
-            </div>
-          </div>
-          <!-- Card -->
-
-          <!-- Card -->
-          <div class="mb-3">
-            <div class="pt-4">
-              <a
-                class="dark-grey-text d-flex justify-content-between"
-                data-toggle="collapse"
-                href="#collapseExample"
-                aria-expanded="false"
-                aria-controls="collapseExample"
+              <router-link to="/checkout">
+                <button type="button" class="btn btn-primary btn-block">
+                  Nastavak na plaćanje
+                </button></router-link
               >
-                Add a discount code (optional)
-                <span><i class="fas fa-chevron-down pt-1"></i></span>
-              </a>
-
-              <div class="collapse" id="collapseExample">
-                <div class="mt-3">
-                  <div class="md-form md-outline mb-0">
-                    <input
-                      type="text"
-                      id="discount-code"
-                      class="form-control font-weight-light"
-                      placeholder="Enter discount code"
-                    />
-                  </div>
-                </div>
-              </div>
+              <hr class="mb-2" />
+              <p class="small mb-0" style="color: #999 !important; ">
+                <i class="fas fa-info-circle mr-1"></i>
+                Za narudžbe iznad 5,000kn besplatna dostava drva!
+              </p>
             </div>
           </div>
+          <!-- Card -->
           <!-- Card -->
         </div>
         <!--Grid column-->
@@ -162,39 +138,16 @@ export default {
   name: "ShoppingCart",
   data() {
     return {
-      carts: [],
-      konacnaCijena: 0,
+      store,
       quantity: 1,
       datum: "",
       moment,
     };
   },
-  mounted() {
-    if (store.addingToCart) {
-      for (let i = 0; i < store.addingToCart.length; i++) {
-        this.carts.push(store.addingToCart[i]);
-        console.log("Uspjeh prvi");
-        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
-      }
-    }
-  },
   components: {
     CartItem,
   },
-  methods: {
-    brisanje() {
-      for (let i = 0; i < this.carts.length; i++) {
-        this.carts.push(store.addingToCart[i]);
-        console.log("Uspjeh");
-        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
-      }
-
-      /*this.carts = [];
-      store.addingToCart = [];
-      this.konacnaCijena = 0;
-      store.cartNumber = 0;*/
-    },
-  },
+  methods: {},
   computed: {
     datumIsporukeOD() {
       moment.locale("hr");
@@ -209,6 +162,18 @@ export default {
       return moment(datum)
         .add(10, "days")
         .format("D. MMMM. YYYY");
+    },
+    brojStvariUKosarici() {
+      if (store.cartNumber > 1) {
+        return "(" + store.cartNumber + " odabira)";
+      } else if (store.cartNumber == 1) {
+        return "(" + store.cartNumber + " odabir)";
+      }
+    },
+    cijenaDostave() {
+      if (store.konacnaCijena <= 5000 && store.konacnaCijena != 0) {
+        return 300;
+      } else return 0;
     },
   },
 };

@@ -7,4 +7,5 @@ export default {
   trenutniKorisnik: {},
   currentEmail: "",
   emailVerified: false,
+  konacnaCijena: 0,
 };

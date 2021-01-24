@@ -23,13 +23,14 @@
                   <i class="fab fa-google google" style="color: white;"></i>
                   Prijava via Google
                 </button>
-                <a
-                  href=""
+                <button
+                  type="button"
                   class="btn btn-block"
                   style="background-color: #3b5998; color: white"
+                  @click="facebookLogin()"
                 >
-                  <i class="fab fa-facebook-f"></i> Prijava via Facebook</a
-                >
+                  <i class="fab fa-facebook-f"></i> Prijava via Facebook
+                </button>
               </p>
               <hr style="border-color: #ccc" />
               <form @submit.stop.prevent="submit">
@@ -124,7 +125,6 @@
 
 <script>
 import { firebase } from "@/firebase.js";
-import Home from "@/views/Home.vue";
 import store from "@/store";
 
 export default {
@@ -163,12 +163,12 @@ export default {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .signInWithPopup(provider)
+        .signInWithRedirect(provider)
         .then((result) => {
+          this.$router.push({ name: "Home" });
           store.currentUserLoggedInWithGoogleOrFacebook = true;
           /** @type {firebase.auth.OAuthCredential} */
           var credential = result.credential;
-          this.$router.push({ name: "Home" });
           var token = credential.accessToken;
           var user = result.user;
         })
@@ -182,6 +182,33 @@ export default {
           console.log(email);
           var credential = error.credential;
           console.log(credential);
+        });
+    },
+
+    facebookLogin() {
+      var provider = new firebase.auth.FacebookAuthProvider();
+
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          this.$router.push({ name: "Home" });
+          store.currentUserLoggedInWithGoogleOrFacebook = true;
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential;
+
+          var user = result.user;
+          var accessToken = credential.accessToken;
+          console.log(user);
+        })
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          var email = error.email;
+          var credential = error.credential;
+          console.log(errorMessage);
+
+          // ...
         });
     },
     promjenaLozinke() {

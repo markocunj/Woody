@@ -26,13 +26,19 @@
         </h4>
         <ul class="list-group mb-3 sticky-top">
           <checkout-cart-item
-            v-for="cart in carts"
-            :key="cart.id"
-            :checkoutCartInfo="cart"
+            v-for="addingToCart in store.addingToCart"
+            :key="addingToCart.id"
+            :checkoutCartInfo="addingToCart"
           />
           <li class="list-group-item d-flex justify-content-between">
+            <span>Dostava </span>
+            +{{ cijenaDostave }} kn
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
             <span>Ukupno: </span>
-            <strong>{{ konacnaCijena }}kn</strong>
+            <strong
+              >{{ (store.konacnaCijena + cijenaDostave).toFixed(2) }}kn</strong
+            >
           </li>
         </ul>
       </div>
@@ -245,16 +251,6 @@ export default {
       konacnaCijena: 0,
     };
   },
-
-  mounted() {
-    if (store.addingToCart) {
-      for (let i = 0; i < store.addingToCart.length; i++) {
-        this.carts.push(store.addingToCart[i]);
-        console.log("Uspjeh");
-        this.konacnaCijena = this.konacnaCijena + this.carts[i].cijena;
-      }
-    }
-  },
   components: {
     CheckoutCartItem,
   },
@@ -269,6 +265,13 @@ export default {
       if (this.valid) {
         this.$router.push({ name: "Home" });
       }
+    },
+  },
+  computed: {
+    cijenaDostave() {
+      if (store.konacnaCijena <= 5000 && store.konacnaCijena != 0) {
+        return 300;
+      } else return 0;
     },
   },
 };

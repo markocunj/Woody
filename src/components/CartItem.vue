@@ -2,11 +2,7 @@
   <div class="row mb-4">
     <div class="col-md-5 col-lg-3 col-xl-3">
       <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-        <img
-          class="img-fluid w-100"
-          src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg"
-          alt="Sample"
-        />
+        <img class="img-fluid w-100" :src="cartInfo.url" />
       </div>
     </div>
     <div class="col-md-7 col-lg-9 col-xl-9">
@@ -26,9 +22,11 @@
           </div>
           <div>
             <a
+              href="#!"
               type="button"
               class="card-link-secondary small text-uppercase mr-3"
-              ><i class="fas fa-info-circle mr-1"></i> {{ cartInfo.id }}
+              @click="removeItem()"
+              ><i class="fas fa-trash-alt mr-1"></i> Maknite iz košarice
             </a>
           </div>
         </div>
@@ -49,31 +47,6 @@
 </template>
 
 <script>
-/*
-    <div class="form-row">
-    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-8">
-      <h4 class="product-name">
-        <strong>{{ cartInfo.naslov }}</strong>
-      </h4>
-      <h4>
-        <small>{{ cartInfo.podnaslov }}</small>
-      </h4>
-    </div>
-    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-      <div
-        class="col-3 col-sm-3 col-md-8 text-md-right"
-        style="padding-top: 10px"
-      >
-        <h6>
-          <strong
-            ><span class="text-muted">{{ cartInfo.cijena }}kn</span></strong
-          >
-        </h6>
-      </div>
-    </div>
-  </div>
-*/
-
 import store from "@/store";
 export default {
   props: ["cartInfo"],
@@ -82,6 +55,26 @@ export default {
     return {
       store,
     };
+  },
+  methods: {
+    idPostoji(id) {
+      return store.addingToCart.some(function(el) {
+        return el.id === id;
+      });
+    },
+    removeItem() {
+      console.log(this.cartInfo);
+      for (let i = 0; i < store.addingToCart.length; i++) {
+        if (this.cartInfo.id == store.addingToCart[i].id) {
+          store.konacnaCijena -= this.cartInfo.cijena;
+          if (store.konacnaCijena <= 0) {
+            store.konacnaCijena = 0;
+          }
+          store.addingToCart.pop();
+          store.cartNumber -= 1;
+        }
+      }
+    },
   },
 };
 </script>

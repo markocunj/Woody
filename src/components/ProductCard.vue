@@ -115,11 +115,12 @@ export default {
           naslov: this.info.naslov,
           podnaslov: this.info.podnaslov,
           id: this.info.id,
+          url: this.info.url,
         };
         console.log("Item added");
         store.addingToCart.push(addingItem);
         store.cartNumber += 1;
-        this.$router.push({ name: "Kosarica" });
+        store.konacnaCijena += addingItem.cijena;
       } else {
         this.neuspjeh = true;
       }
