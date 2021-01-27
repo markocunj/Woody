@@ -44,47 +44,7 @@
       </div>
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Podaci za dostavu</h4>
-        <form
-          @submit.stop.prevent="submit"
-          action="mailto:woody.webshop@gmail.com"
-          method="post"
-          enctype="text/plain"
-        >
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="ime">Ime</label>
-              <input
-                type="text"
-                class="form-control"
-                id="ime"
-                placeholder=""
-                value=""
-                required=""
-              />
-            </div>
-            <div class="col-md-6 mb-3">
-              <label for="prezime">Prezime</label>
-              <input
-                type="text"
-                class="form-control"
-                id="prezime"
-                placeholder=""
-                value=""
-                required=""
-              />
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="email"
-              >Email <span class="text-muted">(Opcionalno)</span></label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Vaš e-mail"
-            />
-          </div>
+        <form @submit.stop.prevent="submit">
           <div class="mb-3">
             <label for="address">Adresa</label>
             <input
@@ -92,11 +52,9 @@
               class="form-control"
               id="adresa"
               placeholder="Zagrebačka 1"
-              required=""
+              v-model="adresa"
+              required
             />
-            <div class="invalid-feedback">
-              Unesite adresu za dostavu.
-            </div>
           </div>
           <div class="row">
             <div class="col-md-5 mb-3">
@@ -110,6 +68,7 @@
               <select
                 class="custom-select d-block w-100"
                 id="zupanija"
+                v-model="zupanija"
                 required
               >
                 <option value="">Izaberite...</option>
@@ -120,26 +79,25 @@
                 <option>Varaždinska</option>
                 <option>Koprivničko-križevačka</option>
                 <option>Bjelovarsko-bilogorska</option>
-                <option>Primorsko-goranska</option>
-                <option>Ličko-senjska</option>
-                <option>Virovitičko-podravska</option>
-                <option>Požeško-slavonska</option>
-                <option>Brodsko-posavska</option>
-                <option>Zadarska</option>
-                <option>Osječko-baranjska</option>
-                <option>Šibensko-kninska</option>
-                <option>Vukovarsko-srijemska</option>
-                <option>Splitsko-dalmatinska</option>
-                <option>Istarska</option>
-                <option>Dubrovačko-neretvanska</option>
                 <option>Međimurska</option>
                 <option>Grad Zagreb</option>
               </select>
             </div>
             <div class="col-md-3 mb-3">
               <label for="zip">Zip</label>
-              <input type="text" class="form-control" id="zip" required />
-              <div class="invalid-feedback">Zip code required.</div>
+              <input
+                type="text"
+                class="form-control"
+                id="zip"
+                v-model="zip"
+                v-bind:class="{
+                  'form-control': true,
+                  'is-invalid': !validZIP(zip) && blured,
+                }"
+                v-on:blur="blured = true"
+                required
+              />
+              <div class="invalid-feedback">Unesite ispravan ZIP.</div>
             </div>
           </div>
           <div class="mb-3">
@@ -169,19 +127,8 @@
                 >Kreditna kartica</label
               >
             </div>
-            <div class="custom-control custom-radio">
-              <input
-                id="debit"
-                name="paymentMethod"
-                type="radio"
-                class="custom-control-input"
-                required=""
-              />
-              <label class="custom-control-label" for="debit"
-                >Debitna kartica</label
-              >
-            </div>
           </div>
+          <div id="paypal-" aria-labelledby="paypal"></div>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-name">Ime na kartici</label>
@@ -190,7 +137,7 @@
                 class="form-control"
                 id="cc-name"
                 placeholder=""
-                required=""
+                required
               />
               <small class="text-muted"
                 >Puno ime, kako je prikazano na kartici</small
@@ -199,12 +146,21 @@
             <div class="col-md-6 mb-3">
               <label for="cc-number">Broj kartice</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="cc-number"
-                placeholder=""
-                required=""
+                placeholder="Broj"
+                v-model="brojKartice"
+                v-bind:class="{
+                  'form-control': true,
+                  'is-invalid': !validBrojKartice(brojKartice) && blured,
+                }"
+                v-on:blur="blured = true"
+                required
               />
+              <div class="invalid-feedback">
+                Unesite pravilan broj s kartice
+              </div>
             </div>
           </div>
           <div class="row">
@@ -214,26 +170,68 @@
                 type="text"
                 class="form-control"
                 id="cc-expiration"
-                placeholder=""
-                required=""
+                placeholder="Datum"
+                v-model="cardDatum"
+                v-bind:class="{
+                  'form-control': true,
+                  'is-invalid': !validCardDatum(cardDatum) && blured,
+                }"
+                v-on:blur="blured = true"
+                required
               />
-              <div class="invalid-feedback">Expiration date required</div>
             </div>
             <div class="col-md-3 mb-3">
               <label for="cc-cvv">CVV</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 id="cc-cvv"
-                placeholder=""
-                required=""
+                placeholder="CVV"
+                v-model="cardCV"
+                v-bind:class="{
+                  'form-control': true,
+                  'is-invalid': !validCardCV(cardCV) && blured,
+                }"
+                v-on:blur="blured = true"
+                required
               />
             </div>
           </div>
           <hr class="mb-4" />
-          <button class="btn btn-primary btn-lg btn-block" type="submit">
-            Continue to checkout
+          <button
+            class="btn btn-primary btn-lg btn-block"
+            type="submit"
+            data-toggle="modal"
+            data-target="#uspjesnaNarudzba"
+          >
+            Nastavite na plaćanje
           </button>
+          <div
+            class="modal fade"
+            id="uspjesnaNarudzba"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="uspjesnaNarudzba2"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                  Vaša narudžba je uspješno provedena!
+                </div>
+                <div class="modal-body">
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    @click="redirect()"
+                  >
+                    Super!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
@@ -243,27 +241,81 @@
 <script>
 import store from "@/store";
 import CheckoutCartItem from "@/components/CheckoutCartItem.vue";
+import { db } from "@/firebase";
 export default {
   data() {
     return {
       store,
-      carts: [],
       konacnaCijena: 0,
+      blured: false,
+      valid: false,
+      email: store.currentEmail,
+      adresa: "",
+      drzava: "Hrvatska",
+      zupanija: "",
+      zip: "",
+      napomene: "",
+      brojKartice: "",
+      cardCV: "",
+      cardDatum: "",
     };
   },
   components: {
     CheckoutCartItem,
   },
   methods: {
+    redirect() {
+      this.$router.push({ name: "Home" });
+    },
     validate: function() {
       this.blured = true;
-      this.valid = true;
+      if (
+        this.validBrojKartice(this.brojKartice) &&
+        this.validCardCV(this.cardCV) &&
+        this.validCardDatum(this.cardDatum) &&
+        this.validZIP(this.zip)
+      ) {
+        this.valid = true;
+      }
     },
-
+    validBrojKartice: function(brojKartice) {
+      let test = brojKartice;
+      return test.toString().length === 16;
+    },
+    validCardCV: function(cardCV) {
+      return cardCV.toString().length === 3;
+    },
+    validCardDatum: function(cardDatum) {
+      return cardDatum;
+    },
+    validZIP: function(zip) {
+      return zip > 9999 && zip < 54000;
+    },
     submit: function() {
       this.validate();
       if (this.valid) {
-        this.$router.push({ name: "Home" });
+        db.collection("narudzbe")
+          .add({
+            korisnik: store.currentUser.displayName,
+            email: this.email,
+            adresa: this.adresa,
+            drzava: this.drzava,
+            zupanija: this.zupanija,
+            zip: this.zip,
+            napomene: this.napomene,
+            narudzba: store.addingToCart,
+            cijena_narudzbe: store.konacnaCijena,
+            datum_narudzbe: Date.now(),
+          })
+          .then((doc) => {
+            console.log("Narudzba spremljena", doc);
+            store.addingToCart = [];
+            store.konacnaCijena -= store.konacnaCijena;
+            store.cartNumber -= store.cartNumber;
+          })
+          .catch((e) => {
+            console.error(e);
+          });
       }
     },
   },
