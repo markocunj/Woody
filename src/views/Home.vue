@@ -244,6 +244,7 @@ export default {
       wrongPasswordOrEmail: false,
     };
   },
+
   methods: {
     prijava() {
       firebase

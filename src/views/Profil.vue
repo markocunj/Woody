@@ -1,7 +1,7 @@
 <template>
   <div
     class="container"
-    style="background-color: white; margin-top: 20px; margin-bottom: 50px; padding: 50px;"
+    style="background-color: white; margin-top: 50px; margin-bottom: 50px; padding: 50px;"
   >
     <div
       class="card"
@@ -11,7 +11,11 @@
         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
           <h2 class="h3 mb-4 page-title">Profil</h2>
           <div class="my-4">
-            <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <ul
+              class="nav nav-tabs mb-4 justify-content-center"
+              id="myTab"
+              role="tablist"
+            >
               <li class="nav-item">
                 <a
                   class="nav-link active"
@@ -33,6 +37,7 @@
                   role="tab"
                   aria-controls="info"
                   aria-selected="true"
+                  @click="pozivanjeNarudzbi()"
                   >Povijest narudžbi</a
                 >
               </li>
@@ -135,22 +140,15 @@
                 role="tabpanel"
                 aria-labelledby="info-tab"
               >
-                <div class="form-row">
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520"
-                      >Email</label
-                    >
-                    <div class="form-control">
-                      {{ store.trenutniKorisnik.email }}
-                    </div>
-                  </div>
-                  <div class="form-group col-md-4">
-                    <label style="border-bottom: 1px solid #daa520"
-                      >Adresa</label
-                    >
-                    <div class="form-control">Ščapovec 1</div>
-                  </div>
-                </div>
+                <ul>
+                  <li>
+                    <profil-narudzba
+                      v-for="narudzbe in store.narudzbe"
+                      :key="narudzbe.email"
+                      :profilNarudzba="narudzbe"
+                    />
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -160,10 +158,9 @@
   </div>
 </template>
 <script>
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase";
 import store from "@/store.js";
-import { db } from "@/firebase";
-
+import ProfilNarudzba from "@/components/ProfilNarudzba.vue";
 export default {
   name: "Profil",
   data() {
@@ -174,6 +171,9 @@ export default {
       email: "",
     };
   },
+  components: {
+    ProfilNarudzba,
+  },
   mounted() {
     console.log(
       store.currentUserLoggedInWithGoogleOrFacebook,
@@ -181,6 +181,30 @@ export default {
     );
   },
   methods: {
+    pozivanjeNarudzbi() {
+      db.collection("narudzbe")
+        .where("email", "==", "marko.cunj@gmail.com")
+        .get()
+        .then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            const data = doc.data();
+
+            store.narudzbe.push({
+              email: data.email,
+              adresa: data.adresa,
+              datum_narudzbe: data.datum_narudzbe,
+              korisnik: data.korisnik,
+              napomene: data.napomene,
+              zip: data.zip,
+              zupanija: data.zupanija,
+            });
+            console.log("Uspjeh");
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     odjava() {
       firebase
         .auth()

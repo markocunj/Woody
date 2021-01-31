@@ -8,4 +8,5 @@ export default {
   currentEmail: "",
   emailVerified: false,
   konacnaCijena: 0,
+  narudzbe: [],
 };
