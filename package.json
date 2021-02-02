@@ -13,6 +13,7 @@
     "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "tailwindcss": "^2.0.2",
+    "v-switch-case": "^1.0.3",
     "vue": "^2.6.11",
     "vue-float-label": "^1.6.1",
     "vue-moment": "^4.1.0",

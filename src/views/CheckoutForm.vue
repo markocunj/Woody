@@ -108,6 +108,7 @@
               type="napomene"
               class="form-control"
               id="napomene"
+              v-model="napomene"
               placeholder="Vaše eventualne napomene"
             />
           </div>
@@ -258,6 +259,7 @@ export default {
       brojKartice: "",
       cardCV: "",
       cardDatum: "",
+      status: "proizvodnja",
     };
   },
   components: {
@@ -301,11 +303,13 @@ export default {
             adresa: this.adresa,
             drzava: this.drzava,
             zupanija: this.zupanija,
+            status: this.status,
             zip: this.zip,
             napomene: this.napomene,
             narudzba: store.addingToCart,
             cijena_narudzbe: store.konacnaCijena,
             datum_narudzbe: Date.now(),
+            id: Math.random(),
           })
           .then((doc) => {
             console.log("Narudzba spremljena", doc);

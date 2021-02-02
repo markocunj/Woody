@@ -140,15 +140,11 @@
                 role="tabpanel"
                 aria-labelledby="info-tab"
               >
-                <ul>
-                  <li>
-                    <profil-narudzba
-                      v-for="narudzbe in store.narudzbe"
-                      :key="narudzbe.email"
-                      :profilNarudzba="narudzbe"
-                    />
-                  </li>
-                </ul>
+                <profil-narudzba
+                  v-for="narudzbe in store.narudzbe"
+                  :key="narudzbe.id"
+                  :profilNarudzba="narudzbe"
+                />
               </div>
             </div>
           </div>
@@ -182,17 +178,21 @@ export default {
   },
   methods: {
     pozivanjeNarudzbi() {
+      this.email = store.currentEmail;
       db.collection("narudzbe")
-        .where("email", "==", "marko.cunj@gmail.com")
+        .where("email", "==", this.email)
         .get()
         .then(function(querySnapshot) {
+          store.narudzbe = [];
           querySnapshot.forEach(function(doc) {
             const data = doc.data();
-
             store.narudzbe.push({
               email: data.email,
               adresa: data.adresa,
+              status: data.status,
+              cijena_narudzbe: data.cijena_narudzbe,
               datum_narudzbe: data.datum_narudzbe,
+              narudzba: data.narudzba,
               korisnik: data.korisnik,
               napomene: data.napomene,
               zip: data.zip,

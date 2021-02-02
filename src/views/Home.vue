@@ -220,7 +220,9 @@
               ></a>
             </li>
             <li>
-              <a class="" href="#"><i class="fab fa-google google"></i></a>
+              <a class="" href="https://gmail.com"
+                ><i class="fab fa-google google"></i
+              ></a>
             </li>
           </ul>
         </div>
