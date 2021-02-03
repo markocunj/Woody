@@ -11,5 +11,4 @@ export default {
   narudzbe: [],
   currentUserIsAdmin: false,
   updateNarudzbi: [],
-  doc_id: "",
 };

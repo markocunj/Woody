@@ -192,11 +192,7 @@ export default {
           store.currentUserLoggedInWithGoogleOrFacebook = true;
           /** @type {firebase.auth.OAuthCredential} */
           var credential = result.credential;
-
-          var user = result.user;
-          var accessToken = credential.accessToken;
-          console.log(user);
-          $router.push({ name: "Home" });
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           var errorCode = error.code;

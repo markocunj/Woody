@@ -61,7 +61,8 @@
                 style="color: #616D6D; border: 1px solid; width: 35%"
               />
               <p>
-                Trenutno traju zimski popusti u kojima cijena ide čak do -20%!
+                <i class="fas fa-info-circle"></i> Za narudžbe iznad 5.000,00
+                kuna, besplatna dostava!
               </p>
               <router-link to="/ponuda">
                 <button type="button" class="btn btn-block btn-light">
@@ -307,7 +308,6 @@ export default {
           console.log(credential);
           // ...
         });
-      store.currentUserLoggedInWithGoogleOrFacebook = true;
     },
     facebookLogin() {
       var provider = new firebase.auth.FacebookAuthProvider();
@@ -333,7 +333,6 @@ export default {
 
           // ...
         });
-      store.currentUserLoggedInWithGoogleOrFacebook = true;
     },
 
     validate: function() {
