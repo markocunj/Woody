@@ -138,6 +138,7 @@
                 class="form-control"
                 id="cc-name"
                 placeholder=""
+                v-model="imeKartica"
                 required
               />
               <small class="text-muted"
@@ -202,6 +203,7 @@
           <button
             class="btn btn-primary btn-lg btn-block"
             type="submit"
+            :disabled="!testIspravnosti"
             data-toggle="modal"
             data-target="#uspjesnaNarudzba"
           >
@@ -255,11 +257,14 @@ export default {
       drzava: "Hrvatska",
       zupanija: "",
       zip: "",
+      imeKartica: "",
       napomene: "",
       brojKartice: "",
       cardCV: "",
       cardDatum: "",
       status: "proizvodnja",
+      narudzbaUspjesna: false,
+      ispravno: false,
     };
   },
   components: {
@@ -320,6 +325,7 @@ export default {
           .catch((e) => {
             console.error(e);
           });
+        this.narudzbaUspjesna = true;
       }
     },
   },
@@ -328,6 +334,22 @@ export default {
       if (store.konacnaCijena <= 5000 && store.konacnaCijena != 0) {
         return 300;
       } else return 0;
+    },
+    testIspravnosti: function() {
+      if (
+        this.email != "" &&
+        this.adresa != "" &&
+        this.zupanija != "" &&
+        this.zip != "" &&
+        this.cardCV != "" &&
+        this.cardDatum != "" &&
+        this.imeKartica != "" &&
+        this.brojKartice != ""
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };
