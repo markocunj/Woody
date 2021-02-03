@@ -163,14 +163,11 @@ export default {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .signInWithRedirect(provider)
+        .signInWithPopup(provider)
         .then((result) => {
-          this.$router.push({ name: "Home" });
           store.currentUserLoggedInWithGoogleOrFacebook = true;
           /** @type {firebase.auth.OAuthCredential} */
-          var credential = result.credential;
-          var token = credential.accessToken;
-          var user = result.user;
+          this.$router.push({ name: "Home" });
         })
         .catch((error) => {
           // Handle Errors here.
@@ -192,7 +189,6 @@ export default {
         .auth()
         .signInWithPopup(provider)
         .then((result) => {
-          this.$router.push({ name: "Home" });
           store.currentUserLoggedInWithGoogleOrFacebook = true;
           /** @type {firebase.auth.OAuthCredential} */
           var credential = result.credential;
@@ -200,6 +196,7 @@ export default {
           var user = result.user;
           var accessToken = credential.accessToken;
           console.log(user);
+          $router.push({ name: "Home" });
         })
         .catch((error) => {
           var errorCode = error.code;

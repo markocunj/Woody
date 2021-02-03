@@ -78,7 +78,7 @@ firebase.auth().onAuthStateChanged((user) => {
     store.currentUser = user;
     store.emailVerified = user.emailVerified;
     store.currentEmail = user.email;
-    console.log(user.email);
+    console.log(user);
 
     db.collection("admin")
       .where("email", "==", user.email)

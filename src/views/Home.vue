@@ -281,7 +281,7 @@ export default {
       var provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
-        .signInWithRedirect(provider)
+        .signInWithPopup(provider)
         .then((result) => {
           store.currentUserLoggedInWithGoogleOrFacebook = true;
           /** @type {firebase.auth.OAuthCredential} */
@@ -307,6 +307,7 @@ export default {
           console.log(credential);
           // ...
         });
+      store.currentUserLoggedInWithGoogleOrFacebook = true;
     },
     facebookLogin() {
       var provider = new firebase.auth.FacebookAuthProvider();
@@ -332,6 +333,7 @@ export default {
 
           // ...
         });
+      store.currentUserLoggedInWithGoogleOrFacebook = true;
     },
 
     validate: function() {
