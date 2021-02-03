@@ -8,7 +8,7 @@
         {{ checkoutCartInfo.duzina }}cm</small
       >
     </div>
-    <span class="text-muted">{{ checkoutCartInfo.cijena }}kn</span>
+    <span class="text-muted">{{ checkoutCartInfo.cijena.toFixed(2) }}kn</span>
   </li>
 </template>
 

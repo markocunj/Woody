@@ -46,9 +46,12 @@
                   required
                 >
                   <option selected value="">Dužina</option>
+                  <option value="20">20</option>
                   <option value="25">25</option>
+                  <option value="30">30</option>
                   <option value="33">33</option>
                   <option value="45">45</option>
+                  <option value="50">50</option>
                 </select>
               </div>
             </div>
@@ -116,6 +119,7 @@ export default {
           podnaslov: this.info.podnaslov,
           id: this.info.id,
           url: this.info.url,
+          glavniID: Math.random(),
         };
         console.log("Item added");
         store.addingToCart.push(addingItem);

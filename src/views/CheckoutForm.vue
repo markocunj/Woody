@@ -309,7 +309,7 @@ export default {
             narudzba: store.addingToCart,
             cijena_narudzbe: store.konacnaCijena,
             datum_narudzbe: Date.now(),
-            id: Math.random(),
+            id_narudzbe: Math.random(),
           })
           .then((doc) => {
             console.log("Narudzba spremljena", doc);

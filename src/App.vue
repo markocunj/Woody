@@ -68,7 +68,7 @@
 
 <script>
 import WoodyFooter from "@/components/WoodyFooter.vue";
-import { firebase } from "@/firebase";
+import { firebase, db } from "@/firebase";
 import router from "@/router";
 import store from "@/store.js";
 
@@ -78,6 +78,20 @@ firebase.auth().onAuthStateChanged((user) => {
     store.currentUser = user;
     store.emailVerified = user.emailVerified;
     store.currentEmail = user.email;
+    console.log(user.email);
+
+    db.collection("admin")
+      .where("email", "==", user.email)
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          store.currentUserIsAdmin = true;
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    store.currentUserIsAdmin = false;
   } else {
     console.log("No user");
     store.currentUser = null;

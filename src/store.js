@@ -9,4 +9,7 @@ export default {
   emailVerified: false,
   konacnaCijena: 0,
   narudzbe: [],
+  currentUserIsAdmin: false,
+  updateNarudzbi: [],
+  doc_id: "",
 };

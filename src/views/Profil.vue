@@ -41,7 +41,21 @@
                   >Povijest narudžbi</a
                 >
               </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="admin-tab"
+                  data-toggle="tab"
+                  href="#admin"
+                  role="tab"
+                  aria-controls="admin"
+                  aria-selected="true"
+                  v-if="store.currentUserIsAdmin"
+                  >Update narudžbi</a
+                >
+              </li>
             </ul>
+
             <div class="tab-content profile-tab" id="myTabContent">
               <div
                 class="tab-pane fade show active"
@@ -142,8 +156,46 @@
               >
                 <profil-narudzba
                   v-for="narudzbe in store.narudzbe"
-                  :key="narudzbe.id"
+                  :key="narudzbe.glavniID"
                   :profilNarudzba="narudzbe"
+                />
+              </div>
+              <div
+                class="tab-pane fade"
+                id="admin"
+                role="tabpanel"
+                aria-labelledby="admin-tab"
+              >
+                <div class="form-row">
+                  <label for="statusNarudzbe"
+                    >Unesite mail koji je povezan sa narudžbom za koju želite
+                    izmjeniti status.
+                  </label>
+                  <input
+                    class="form-control"
+                    type="statusNarudzbe"
+                    name="statusNarudzbe"
+                    id="statusNarudzbe"
+                    v-model="narudzbaEmail"
+                    required
+                    placeholder="Unesite e-mail"
+                    style="border: 1px solid #ccc"
+                  />
+                  <div class="form-group">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      style="margin-top: 15px;"
+                      @click="provjeraBaze"
+                    >
+                      Pronađi narudžbu
+                    </button>
+                  </div>
+                </div>
+                <narudzba-status-update
+                  v-for="narudzbe in store.updateNarudzbi"
+                  :key="narudzbe.glavniID"
+                  :narudzbaStatusUpdate="narudzbe"
                 />
               </div>
             </div>
@@ -157,18 +209,24 @@
 import { firebase, db } from "@/firebase";
 import store from "@/store.js";
 import ProfilNarudzba from "@/components/ProfilNarudzba.vue";
+import moment from "moment";
+import NarudzbaStatusUpdate from "@/components/NarudzbaStatusUpdate.vue";
+
 export default {
   name: "Profil",
   data() {
     return {
+      moment,
       store,
       newPassword: "",
       confirmPassword: "",
       email: "",
+      narudzbaEmail: "",
     };
   },
   components: {
     ProfilNarudzba,
+    NarudzbaStatusUpdate,
   },
   mounted() {
     console.log(
@@ -177,6 +235,33 @@ export default {
     );
   },
   methods: {
+    provjeraBaze() {
+      console.log("Unutar submita!");
+      let email = this.narudzbaEmail;
+      db.collection("narudzbe")
+        .where("email", "==", email)
+        .get()
+        .then(function(querySnapshot) {
+          store.updateNarudzbi = [];
+          querySnapshot.forEach(function(doc) {
+            const data = doc.data();
+            store.updateNarudzbi.push({
+              email: data.email,
+              status: data.status,
+              id: data.id,
+              datum: data.datum_narudzbe,
+              adresa: data.adresa,
+              zupanija: data.zupanija,
+              narudzba: data.narudzba,
+              id_narudzbe: data.id_narudzbe,
+            });
+            console.log(store.updateNarudzbi);
+          });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     pozivanjeNarudzbi() {
       this.email = store.currentEmail;
       db.collection("narudzbe")
@@ -198,7 +283,6 @@ export default {
               zip: data.zip,
               zupanija: data.zupanija,
             });
-            console.log("Uspjeh");
           });
         })
         .catch(function(error) {

@@ -43,9 +43,6 @@ const routes = [
     path: "/kontakt",
     name: "Kontakt",
     component: Kontakt,
-    meta: {
-      needsUser: true,
-    },
   },
   {
     path: "/profil",
